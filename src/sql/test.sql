@@ -1,7 +1,0 @@
-CREATE TABLE IF NOT EXISTS user(
-student_id INT NOT NULL,
-pw CHAR(93) NOT NULL,
-major_code TINYINT NOT NULL,
-name VARCHAR(10) NOT NULL,
-PRIMARY KEY(student_id),
-FOREIGN KEY(major_code) REFERENCES major(major_code) ON UPDATE CASCADE);
