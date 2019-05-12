@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS major(
+major_code TINYINT NOT NULL,
+name VARCHAR(20) NOT NULL,
+college_code TINYINT NOT NULL,
+color VARCHAR(10) NOT NULL,
+PRIMARY KEY(major_code),
+FOREIGN KEY(college_code) REFERENCES college(college_code) ON UPDATE CASCADE);

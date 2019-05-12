@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS post(
+post_id INT NOT NULL,
+reg_date DATETIME NOT NULL,
+exp_date DATETIME NOT NULL,
+title VARCHAR(100) NOT NULL,
+content TEXT NOT NULL,
+img_url VARCHAR(500),
+view_count INT NOT NULL,
+size TINYINT NOT NULL,
+PRIMARY KEY(post_id),
+FOREIGN KEY(post_id) REFERENCES user(student_id) ON UPDATE CASCADE);
