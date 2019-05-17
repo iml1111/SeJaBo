@@ -9,14 +9,16 @@ bp = Blueprint('user', __name__)
 #########################
 #Test Code
 @bp.route('/u_test')
-def user_test():
+@bp.route('/u_test/<zxc>')
+def user_test(zxc = 'asd'):
 	# Do it coding
 	u_list = []
 	for i in range(5):
 		u_list.append(i)
 	return jsonify(
 		result = "This User test",
-		list = u_list
+		list = u_list,
+		new = zxc
 		)
 ##########################
 
@@ -45,13 +47,10 @@ def login_proc():
 			api_result['major'],
 			api_result['name']
 		)
-		print(len(db_data[1]),"dddddddddd")
-		print(db_data[1])
 		with g.db.cursor() as cursor:
 			sql = open("sql/user_register.sql").read()
 			cursor.execute(sql, db_data)
 		g.db.commit()
-	print(api_result,"asdasdadad")
 	current_user = select_id(g.db, user_id)
 	if(check_password_hash(current_user['pw'], user_pw)):
 		return jsonify(
@@ -68,6 +67,4 @@ def select_id(db, string):
 		sql = "SELECT * FROM user WHERE student_id = %s LIMIT 1"
 		cursor.execute(sql,(string,))
 		result = cursor.fetchone()
-		if result is None:
-			return None
 	return result
