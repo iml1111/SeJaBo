@@ -4,4 +4,4 @@ name VARCHAR(20) NOT NULL,
 college_code TINYINT NOT NULL,
 color VARCHAR(10) NOT NULL,
 PRIMARY KEY(major_code),
-FOREIGN KEY(college_code) REFERENCES college(college_code) ON UPDATE CASCADE)ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+FOREIGN KEY(college_code) REFERENCES college(college_code) ON UPDATE CASCADE)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
