@@ -3,6 +3,7 @@ from werkzeug.security import *
 from flask_jwt_extended import *
 from iml_global import *
 from lms_auth import sejong_api
+from werkzeug import secure_filename
 
 bp = Blueprint('user', __name__)
 
@@ -44,10 +45,10 @@ def delete_post(post_id):
       cursor.execute(sql,(post_id,))
    g.db.commit()
    return jsonify(result="success")
-   
+
 #게시물 등록하기
 #프론트 테스트 직접필요!
-@bp.route('/add_post')
+@bp.route('/add_post', methods=["POST"])
 @jwt_required
 def add_post():
 	current_user = select_id(g.db, get_jwt_identity())
@@ -59,7 +60,8 @@ def add_post():
 	size = int(request.form['size'])
 	exp_date = request.form['exp_date']
 	url = request.form['url']
-	img_url = request.form['img_url']
+	img_url = request.files['img_url']
+	img_url.save("./img_save/" + secure_filename(img_url.filename))
 	input_tuple = (
 		current_user['student_id'],
 		exp_date,
