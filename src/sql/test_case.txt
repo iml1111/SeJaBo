@@ -28,6 +28,7 @@ insert into sjb.post values(3,16011075,'2019-04-23 19:00:10','2019-07-11 13:15:0
 insert into sjb.post values(4,16011092,'2019-04-01 19:00:10','2019-07-01 13:15:00','test4','test444',NULL,NULL,4,3);
 insert into sjb.post values(6,15012015,'2019-05-01 19:00:10','2019-06-12 13:15:00','test6','test666',NULL,NULL,6,2);
 insert into sjb.post values(7,17031009,'2019-04-23 19:00:10','2019-06-12 13:15:00','test7','test7',NULL,NULL,7,2);
+insert into sjb.post values(8,16011089,'2019-04-23 19:00:10','2019-06-12 13:15:00','test7','test7',NULL,NULL,7,2);
 insert into sjb.building values(101,'대양AI센터');
 insert into sjb.building values(102,'광개토관');
 insert into sjb.building values(103,'학술정보원');
