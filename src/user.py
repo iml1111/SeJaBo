@@ -9,16 +9,20 @@ bp = Blueprint('user', __name__)
 #########################
 #Test Code
 @bp.route('/u_test')
-@bp.route('/u_test/<zxc>')
-def user_test(zxc = 'asd'):
-	# Do it coding
-	u_list = []
-	for i in range(5):
-		u_list.append(i)
+def user_test():
+	with g.db.cursor() as cursor:
+		sql ='select * from post_building where building_code = 101 and post_id = 1;'
+		cursor.execute(sql)
+		result = cursor.fetchone()
+		print("1",result)
+		sql = "delete from post_building where building_code = 101 and post_id = 1"
+		cursor.execute(sql)
+		sql ='select * from post_building where building_code = 101 and post_id = 1;'
+		cursor.execute(sql)
+		result = cursor.fetchone()
+		print("2",result)
 	return jsonify(
-		result = "This User test",
-		list = u_list,
-		new = zxc
+		result = "This User test"
 		)
 ##########################
 #테스트용 로그인 확인
@@ -29,22 +33,51 @@ def test_lg():
 	if current_user is None: abort(400)
 	return jsonify(result = current_user)
 
+#게시물 삭제
+@bp.route('/delete_post/<int:post_id>')
+@jwt_required
+def delete_post(post_id):
+   current_user=select_id(g.db,get_jwt_identity())
+   if current_user is None: abort(400)
+   with g.db.cursor() as cursor:
+      sql="DELETE FROM post WHERE post_id=%s and author=" + str(current_user['student_id'])
+      cursor.execute(sql,(post_id,))
+   g.db.commit()
+   return jsonify(result="success")
+   
 #게시물 등록하기
 #프론트 테스트 직접필요!
-'''
 @bp.route('/add_post')
 @jwt_required
 def add_post():
 	current_user = select_id(g.db, get_jwt_identity())
 	if current_user is None: abort(400)
+	build_list = {"dae":101, "gwang":102, "hak":103, "yul":104}
 	build = request.form['build']
 	title = request.form['title']
 	content = request.form['content']
 	size = int(request.form['size'])
 	exp_date = request.form['exp_date']
 	url = request.form['url']
+	img_url = request.form['img_url']
+	input_tuple = (
+		current_user['student_id'],
+		exp_date,
+		title,
+		content,
+		url,
+		img_url,
+		size
+	)
 	with g.db.cursor() as cursor:
-		sql = "insert into post values(%s,%s,now(),%s,%s,%s,%s,0,%s);"'''
+		sql = "insert into post values(,%s,now(),%s,%s,%s,%s,0,%s);"
+		cursor.execute(sql, input_tuple)
+		for i in build:
+			sql = "insert into post_building values(%s,\
+			(select post_id from v_post where author = %s));"
+			cursor.execute(sql,(build_list[i],current_user["student_id"]))
+	g.db.commit()
+	return jsonify(success = "success")
 
 #회원정보 반환
 @bp.route('/userinfo')
