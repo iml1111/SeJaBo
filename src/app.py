@@ -10,13 +10,16 @@ application = Flask(__name__, instance_relative_config=True)
 application.config.update(
 		DEBUG = True,
 		JWT_SECRET_KEY = 'secret string',
-		MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+		MAX_CONTENT_LENGTH = 16 * 1024 * 1024,
+		UPLOAD_FOLDER = './img_save/'
 	)
 jwt = JWTManager(application)
 
 #initialize process
 def create_app(test_config = None):
 	init_db()
+	#백그라운드 지속 작업
+	#schedule_init() 
 	application.register_blueprint(user.bp)
 	application.register_blueprint(board.bp)
 	application.register_blueprint(error.bp)
@@ -25,6 +28,10 @@ def create_app(test_config = None):
 @application.route('/')
 def index():
 	return render_template('index.html')
+#test
+@application.route('/test')
+def index2():
+	return render_template('test.html')
 
 @application.before_request
 def before_request():

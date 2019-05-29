@@ -19,12 +19,7 @@ def board_test():
 @bp.route('/get_posts')
 def get_post():
    with g.db.cursor() as cursor:
-      sql="SELECT vp.post_id,title,content,reg_date,exp_date,user_name as author_name,author as author_id,\
-         major_name as author_major,color,url,img_url,view_count,up as like_count,down as dislike_count,size,\
-         yul as build_yul,dae as build_dae,hak as build_hak,gwang as build_gwang,num as build_count\
-         FROM v_post as vp\
-         WHERE exp_date>now()\
-         ORDER BY exp_date,up DESC,view_count DESC, reg_date, size DESC,num;"
+      sql=open("sql/get_post.sql").read()
       cursor.execute(sql,)
       result=cursor.fetchall()
    return jsonify(
@@ -38,12 +33,7 @@ def get_posts(build):
    if build not in ['yul','dae','hak','gwang']:
       abort(400)
    with g.db.cursor() as cursor:
-      sql="SELECT vp.post_id,title,content,reg_date,exp_date,user_name as author_name,author as author_id,\
-         major_name as author_major,color,url,img_url,view_count,up as like_count,down as dislike_count,size,\
-         yul as build_yul,dae as build_dae,hak as build_hak,gwang as build_gwang,num as build_count\
-         FROM v_post as vp\
-         WHERE exp_date>now() and build_input=1\
-         ORDER BY exp_date,up DESC,view_count DESC, reg_date, size DESC,num;"
+      sql=open("sql/get_post2.sql").read()
       sql = sql.split("build_input")
       sql = sql[0] + build + sql[1]
       cursor.execute(sql)
@@ -108,13 +98,7 @@ def like(post_id,interest):
 @bp.route('/search/<string:words>')
 def search(words):
    with g.db.cursor() as cursor:
-      sql="SELECT vp.post_id,title,content,reg_date,exp_date,user_name as author_name,author as author_id,\
-         major_name as author_major,vp.color,url,img_url,view_count,up as like_count,down as dislike_count,size,\
-         yul as build_yul,dae as build_dae,hak as build_hak,gwang as build_gwang,num as build_count\
-         FROM v_post as vp, college as col,major as m\
-         WHERE col.college_code=m.college_code and m.major_code=vp.major_code and exp_date>now() \
-         and CONCAT(title,content,user_name,author,major_name,col.name) like %s\
-         ORDER BY exp_date,up DESC,view_count DESC, reg_date, size DESC,num;"
+      sql=open("sql/search.sql").read()
       cursor.execute(sql,('%'+words+'%',))
       result=cursor.fetchall()
    if result is None:
@@ -128,10 +112,7 @@ def search(words):
 @bp.route('/v/<int:post_id>')
 def v(post_id):
    with g.db.cursor() as cursor:
-      sql="SELECT post_id,title,content,reg_date,exp_date,user_name as author_name,author as author_id,\
-         major_name as author_major,color,url,img_url,view_count,up as like_count,down as dislike_count,size,\
-         yul as build_yul,dae as build_dae,hak as build_hak,gwang as build_gwang,num as build_count\
-         FROM v_post WHERE post_id=%s;"
+      sql=open("sql/v.sql").read()
       cursor.execute(sql,(post_id,))
       result = cursor.fetchone()
    if result is None:

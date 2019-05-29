@@ -8,16 +8,19 @@ header = {
 	'Authorization':"Bearer " + token
 }
 #Debug Here
-url = "http://localhost/userinfo"
+url = "http://localhost/mod_post"
 data = {
 #POST
 "id":"16011089",
-"pw":"!hkw10256"
+"pw":"!hkw10256",
+"title":"qsc",
+"content":"asdcasdwe",
+"url":"asd"
 }
 ######
 #GET 방식
-html = requests.get(url, headers =header, data = data).content
+#html = requests.get(url, headers =header, data = data).content
 #POST 방식
-#html = requests.post(url, headers =header, data = data).content
+html = requests.post(url, headers =header, data = data).content
 html = json.loads(html)
 pprint(html)

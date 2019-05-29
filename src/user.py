@@ -4,35 +4,12 @@ from flask_jwt_extended import *
 from iml_global import *
 from lms_auth import sejong_api
 from werkzeug import secure_filename
+import os
 
 bp = Blueprint('user', __name__)
-
-#########################
-#Test Code
-@bp.route('/u_test')
-def user_test():
-	with g.db.cursor() as cursor:
-		sql ='select * from post_building where building_code = 101 and post_id = 1;'
-		cursor.execute(sql)
-		result = cursor.fetchone()
-		print("1",result)
-		sql = "delete from post_building where building_code = 101 and post_id = 1"
-		cursor.execute(sql)
-		sql ='select * from post_building where building_code = 101 and post_id = 1;'
-		cursor.execute(sql)
-		result = cursor.fetchone()
-		print("2",result)
-	return jsonify(
-		result = "This User test"
-		)
-##########################
-#테스트용 로그인 확인
-@bp.route('/login_test')
-@jwt_required
-def test_lg():
-	current_user = select_id(g.db, get_jwt_identity())
-	if current_user is None: abort(400)
-	return jsonify(result = current_user)
+UPLOAD_PATH = "/static/img_save/"
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+BUILD_LIST = {"dae":101, "gwang":102, "hak":103, "yul":104}
 
 #게시물 삭제
 @bp.route('/delete_post/<int:post_id>')
@@ -47,39 +24,67 @@ def delete_post(post_id):
    return jsonify(result="success")
 
 #게시물 등록하기
-#프론트 테스트 직접필요!
 @bp.route('/add_post', methods=["POST"])
-@jwt_required
+#@jwt_required
 def add_post():
-	current_user = select_id(g.db, get_jwt_identity())
-	if current_user is None: abort(400)
-	build_list = {"dae":101, "gwang":102, "hak":103, "yul":104}
-	build = request.form['build']
+	#current_user = select_id(g.db, get_jwt_identity())
+	#if current_user is None: abort(400)
+	current_user = {"student_id":16011075}
+	build = request.form.getlist('build')
 	title = request.form['title']
 	content = request.form['content']
 	size = int(request.form['size'])
 	exp_date = request.form['exp_date']
-	url = request.form['url']
-	img_url = request.files['img_url']
-	img_url.save("./img_save/" + secure_filename(img_url.filename))
+	url = request.form.get('url')
+	if url == "": url = None
+	img = request.files['img_url']
+	if img.filename != "":
+		filename = str(current_user['student_id']) + "." + secure_filename(img.filename).split(".")[-1]
+		img.save("." + UPLOAD_PATH + filename)
+	else: 
+		filename = None
 	input_tuple = (
 		current_user['student_id'],
 		exp_date,
 		title,
 		content,
 		url,
-		img_url,
+		filename,
 		size
 	)
 	with g.db.cursor() as cursor:
-		sql = "insert into post values(,%s,now(),%s,%s,%s,%s,0,%s);"
+		sql = "insert into post values(default,%s,now(),%s,%s,%s,%s,%s,0,%s);"
 		cursor.execute(sql, input_tuple)
 		for i in build:
 			sql = "insert into post_building values(%s,\
-			(select post_id from v_post where author = %s));"
-			cursor.execute(sql,(build_list[i],current_user["student_id"]))
+			(select post_id from v_post where author = %s LIMIT 1));"
+			cursor.execute(sql,(BUILD_LIST[i],current_user['student_id']))
 	g.db.commit()
 	return jsonify(success = "success")
+
+#게시물 수정하기
+@bp.route('/mod_post', methods=["POST"])
+@jwt_required
+def modify_post():
+	current_user = select_id(g.db, get_jwt_identity())
+	if current_user is None: abort(400)
+	title = request.form['title']
+	content = request.form['content']
+	url = request.form['url']
+	input_tuple = (
+		title,
+		content,
+		url,
+		current_user['student_id']
+	)
+	with g.db.cursor() as cursor:
+		sql = "UPDATE post \
+		SET title = %s, content = %s, url = %s \
+		WHERE author = %s"
+		cursor.execute(sql, input_tuple)
+	g.db.commit()
+	return jsonify(success = "success")
+
 
 #회원정보 반환
 @bp.route('/userinfo')
@@ -134,7 +139,8 @@ def login_proc():
 	if(check_password_hash(current_user['pw'], user_pw)):
 		return jsonify(
 				result = "success",
-				access_token = create_access_token(identity=user_id, expires_delta=False)
+				access_token = create_access_token(identity=user_id, 
+													expires_delta=False)
 				)
 	else:
 		return jsonify(result = "password incorrect")
@@ -147,3 +153,7 @@ def select_id(db, string):
 		cursor.execute(sql,(string,))
 		result = cursor.fetchone()
 	return result
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

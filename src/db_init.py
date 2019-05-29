@@ -49,6 +49,15 @@ def init_db():
 		sql = open("table/t_like_dislike.sql").read()
 		cursor.execute(sql)
 		#init_data
+		sql = open("sql/init_data.txt","r")
+		while True:
+			line = sql.readline()
+			if not line: break
+			try:
+				cursor.execute(line)
+			except:
+				continue
+		#test_case
 		sql = open("sql/test_case.txt","r")
 		while True:
 			line = sql.readline()
