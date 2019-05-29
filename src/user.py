@@ -27,9 +27,10 @@ def delete_post(post_id):
 @bp.route('/add_post', methods=["POST"])
 #@jwt_required
 def add_post():
-	#current_user = select_id(g.db, get_jwt_identity())
-	#if current_user is None: abort(400)
-	current_user = {"student_id":16011075}
+	current_user = select_id(g.db, get_jwt_identity())
+	if current_user is None: abort(400)
+	if current_user['my_post'] is not None: abort(400)
+	#current_user = {"student_id":16011075}
 	build = request.form.getlist('build')
 	title = request.form['title']
 	content = request.form['content']
@@ -39,6 +40,7 @@ def add_post():
 	if url == "": url = None
 	img = request.files['img_url']
 	if img.filename != "":
+		if not allowed_file(filename): abort(400)
 		filename = str(current_user['student_id']) + "." + secure_filename(img.filename).split(".")[-1]
 		img.save("." + UPLOAD_PATH + filename)
 	else: 
@@ -68,6 +70,7 @@ def add_post():
 def modify_post():
 	current_user = select_id(g.db, get_jwt_identity())
 	if current_user is None: abort(400)
+	if current_user['my_post'] is None: abort(400)
 	title = request.form['title']
 	content = request.form['content']
 	url = request.form['url']
@@ -99,7 +102,7 @@ def get_user():
 		cursor.execute(sql,(current_user['student_id'],))
 		userinfo.update(cursor.fetchone())
 		# 회원이 쓴 글이 있으면 반환
-		sql = "select * from v_post where author=%s;"
+		sql = "SELECT * from v_post where author=%s LIMIT 1;"
 		cursor.execute(sql,(current_user['student_id'],))
 		userinfo.update({"my_post":cursor.fetchone()})
 		#좋아요 누른 글목록 가져오기
