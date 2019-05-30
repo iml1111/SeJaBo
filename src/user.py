@@ -5,18 +5,20 @@ from iml_global import *
 from lms_auth import sejong_api
 from werkzeug import secure_filename
 import os
+import datetime
 
 bp = Blueprint('user', __name__)
 UPLOAD_PATH = "/static/img_save/"
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 BUILD_LIST = {"dae":101, "gwang":102, "hak":103, "yul":104}
+EXP_DATE_dict = {"1":7, "2":10, "3":15, "4":20}
 
 #게시물 삭제
 @bp.route('/delete_post/<int:post_id>')
 @jwt_required
 def delete_post(post_id):
    current_user=select_id(g.db,get_jwt_identity())
-   if current_user is None: abort(400)
+   if current_user is None: abort(403)
    with g.db.cursor() as cursor:
       sql="DELETE FROM post WHERE post_id=%s and author=" + str(current_user['student_id'])
       cursor.execute(sql,(post_id,))
@@ -28,10 +30,12 @@ def delete_post(post_id):
 @jwt_required
 def add_post():
 	current_user = select_id(g.db, get_jwt_identity())
-	if current_user is None: abort(400)
-	if current_user['my_post'] is not None: abort(400)
-	#if 
-	#current_user = {"student_id":16011075}
+	if current_user is None: abort(403)
+	with g.db.cursor() as cursor:
+		sql = "SELECT * from post where author = %s"
+		cursor.execute(sql, (current_user['select_id'],))
+		result = cursor.fetchone()
+	if result is not None: abort(400)
 	build = request.form.getlist('build')
 	title = request.form['title']
 	content = request.form['content']
@@ -39,6 +43,15 @@ def add_post():
 	exp_date = request.form['exp_date']
 	url = request.form.get('url')
 	if url == "": url = None
+	if not all(i in build.keys() for i in build): abort(400)
+	if not (len(title) >= 1 and len(title) <= 500): abort(400)
+	if size not in ["1","2","3","4"]: abort(400)
+	if get_add_day(EXP_DATE_dict[size]) < exp_date: abort(400)
+	try:
+		datetime.datetime.strptime(exp_date,"%Y-%m-%d")
+	except:
+		abort(400)
+	if url is not None and url.startswith("http") is False: abort(400)
 	img = request.files['img_url']
 	if img.filename != "":
 		if not allowed_file(filename): abort(400)
@@ -46,6 +59,7 @@ def add_post():
 		img.save("." + UPLOAD_PATH + filename)
 	else: 
 		filename = None
+	if filename is not None and allowed_file(filename) is False: abort(400)
 	input_tuple = (
 		current_user['student_id'],
 		exp_date,
@@ -70,7 +84,7 @@ def add_post():
 @jwt_required
 def modify_post():
 	current_user = select_id(g.db, get_jwt_identity())
-	if current_user is None: abort(400)
+	if current_user is None: abort(403)
 	with g.db.cursor() as cursor:
 		sql = "SELECT * from post where author = %s"
 		cursor.execute(sql, (current_user['select_id'],))
@@ -78,7 +92,11 @@ def modify_post():
 	if result is not None: abort(400)
 	title = request.form['title']
 	content = request.form['content']
-	url = request.form['url']
+	url = request.form.get('url')
+	if url == "": url = None
+	if not (len(title) >= 1 and len(title) <= 500): abort(400)
+	if len(content) == 0: abort(400)
+	if url is not None and url.startswith("http") is False: abort(400)
 	input_tuple = (
 		title,
 		content,
@@ -99,7 +117,7 @@ def modify_post():
 @jwt_required
 def get_user():
 	current_user = select_id(g.db, get_jwt_identity())
-	if current_user is None: abort(400)
+	if current_user is None: abort(403)
 	userinfo = {}
 	with g.db.cursor() as cursor:
 		#회원 테이블 정보 반환
@@ -131,8 +149,7 @@ def login_proc():
 	current_user = select_id(g.db, user_id)
 	if current_user is None:
 		api_result = sejong_api(user_id, user_pw)
-		if not api_result['result']:
-			return jsonify(result = "your not sejong")
+		if not api_result['result']: abort(406)
 		db_data = (
 			user_id,
 			generate_password_hash(user_pw),
@@ -152,7 +169,6 @@ def login_proc():
 				)
 	else:
 		return jsonify(result = "password incorrect")
-
 
 # 사용자 관련 함수##############################################
 def select_id(db, string):

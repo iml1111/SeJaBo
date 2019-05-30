@@ -5,22 +5,12 @@ from iml_global import *
 
 bp = Blueprint('board', __name__)
 
-@bp.route('/b_test')
-def board_test():
-   # Do it coding
-   b_list = []
-   for i in range(5, 0, -1):
-      b_list.append(i)
-   return jsonify(
-      result = "This Board test",
-      list = b_list
-      )
 #게시물 불러오기: 입력값이 없을떄 -> 모든 게시물 다 불러온다.
 @bp.route('/get_posts')
 def get_post():
    with g.db.cursor() as cursor:
       sql=open("sql/get_post.sql").read()
-      cursor.execute(sql,)
+      cursor.execute(sql)
       result=cursor.fetchall()
    return jsonify(
       list=result,
@@ -49,12 +39,7 @@ def get_posts(build):
 @bp.route('/view_add/<int:post_id>')
 def view_add(post_id):
    with g.db.cursor() as cursor:
-      sql = "SELECT post_id FROM post where post_id = %s LIMIT 1"
-      cursor.execute(sql,(post_id,))
-      result = cursor.fetchone()
-      if result is None:
-         abort(400)
-      sql = "update post set view_count=view_count+1 where post_id=%s"
+      sql = "UPDATE post set view_count=view_count+1 where post_id=%s"
       cursor.execute(sql,(post_id,))
    g.db.commit()
    return jsonify(result = "success")
@@ -64,7 +49,7 @@ def view_add(post_id):
 @jwt_required
 def like(post_id,interest):
    current_user = select_id(g.db, get_jwt_identity())
-   if current_user is None: abort(400)
+   if current_user is None: abort(403)
    with g.db.cursor() as cursor:
       sql="SELECT student_id,post_id,interest FROM like_dislike WHERE post_id=%s and student_id=" + str(current_user['student_id'])
       cursor.execute(sql,(post_id,))
@@ -84,10 +69,10 @@ def like(post_id,interest):
             return jsonify(result="success",comment="already")
          else:
             if result['interest']==0:
-               sql="update like_dislike set interest=1 where student_id=%s and interest=0 and post_id=%s;"
+               sql="UPDATE like_dislike set interest=1 where student_id=%s and interest=0 and post_id=%s;"
                cursor.execute(sql,(current_user['student_id'],post_id,))
             else:
-               sql="update like_dislike set interest=0 where student_id=%s and interest=1 and post_id=%s;"
+               sql="UPDATE like_dislike set interest=0 where student_id=%s and interest=1 and post_id=%s;"
                cursor.execute(sql,(current_user['student_id'],post_id,))
    g.db.commit()
    return jsonify(result="success")
@@ -101,8 +86,6 @@ def search(words):
       sql=open("sql/search.sql").read()
       cursor.execute(sql,('%'+words+'%',))
       result=cursor.fetchall()
-   if result is None:
-      abort(400)
    return jsonify(
       list=result,
       result="success"
@@ -115,8 +98,6 @@ def v(post_id):
       sql=open("sql/v.sql").read()
       cursor.execute(sql,(post_id,))
       result = cursor.fetchone()
-   if result is None:
-      abort(400)
    return jsonify(
       list=result,
       result="success"

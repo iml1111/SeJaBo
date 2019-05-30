@@ -49,9 +49,9 @@ def get_today():
 	date = now.strftime("%Y-%m-%d")
 	return date
 
-def get_default_day(day):
-	now = datetime.datetime.now() - datetime.timedelta(days = day)
-	date = now.strftime("%Y-%m-%d %H:%M:%S")
+def get_add_day(day):
+	now = datetime.datetime.now() + datetime.timedelta(days = day)
+	date = now.strftime("%Y-%m-%d")
 
 	return date
 
