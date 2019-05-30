@@ -1,0 +1,924 @@
+/*템플릿 뜯어올 때 폰트임 현재는 유지 시켜놓았는데 나중에 구글 폰트를 통해서 수정 해야함.*/
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('/static/fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('/static/fonts/poppins/Poppins-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('/static/fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Raleway-Regular;
+  src: url('/static/fonts/raleway/Raleway-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Raleway-Black;
+  src: url('/static/fonts/raleway/Raleway-Black.ttf'); 
+}
+
+@font-face {
+  font-family: Raleway-SemiBold;
+  src: url('/static/fonts/raleway/Raleway-SemiBold.ttf'); 
+}
+
+@font-face {
+  font-family: Raleway-Bold;
+  src: url('/static/fonts/raleway/Raleway-Bold.ttf'); 
+}
+
+
+/*전체 스타일*/
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%;
+  font-family: Poppins-Regular, sans-serif;
+  background-image: linear-gradient(-45deg, #F5D0A9, #A9F5BC, #CED8F6, #F5A9D0);
+  z-index: -1;
+  overflow: hidden;
+}
+
+/*부분 요소 스타일 템플릿 디자인을 유지*/
+/*원래는 p-l-50과 같이 하나하나 다 들어있는 css를 필요한 값만 추가시키고 기존 p-l-50과 같이 들어있는 css파일은 삭제함.*/
+a {
+	font-family: Poppins-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+a:focus {
+	outline: none !important;
+}
+
+a:hover {
+	text-decoration: none;
+  color: #d33f8d;
+}
+
+/* 스낵 바 */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 8px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  right: 30px; /* Center the snackbar */
+  bottom: 20px; /* 20px from the bottom */
+  cursor: default;
+  box-shadow: 0 0 6px #bbbbbb; 
+}
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 20px; opacity: 1;}
+}
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 20px; opacity: 1;}
+}
+@-webkit-keyframes fadeout {
+  from {bottom: 20px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+@keyframes fadeout {
+  from {bottom: 20px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+/* 오른쪽 슬라이드 메뉴 미디어 쿼리 */
+@media screen and (max-width: 77em) {
+    .outer-nav.top {
+        top: 15%;
+    }
+    .outer-nav.bottom {
+        bottom: 15%;
+    }
+}
+
+/*---------------------------------------------*/
+h1,h2,h3,h4,h5,h6 {
+	margin: 0px;
+}
+
+p {
+	font-family: Poppins-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+}
+
+ul, li {
+	margin: 0px;
+	list-style-type: none;
+}
+
+.space {
+    text-align: center;
+    width: 100%;
+    padding-top: 42px;
+    padding-bottom: 22px;
+}
+/*---------------------------------------------*/
+input {
+	outline: none;
+}
+
+textarea {
+  outline: none;
+  border: none;
+}
+
+
+/*---------------------------------------------*/
+button {
+	outline: none !important;
+	border: none;
+  background: transparent;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+iframe {
+	border: none !important;
+}
+
+/*------------------------------------------------------------------------*/
+/*BOX css*/
+.box_css_basic {
+  position: absolute;
+  box-shadow: 0 0 3px #eeeeee;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 250;
+  transition: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+.box_css_text {
+  font-family: Raleway-Black;
+  text-shadow: 0 1px 2px #222222;
+  font-weight: lighter;
+  overflow: hidden;
+  word-break: break-all;
+  color: #444444;
+}
+.box_css_img {background-size: cover;}
+.box_fa30 {font-size: 30px;} 
+.box_fa40 {font-size: 38px;}
+.box_fa60 {font-size: 60px;}
+.box_fa80 {font-size: 75px;}
+[id^="box_"]:hover {
+  margin-top: -10px;
+  box-shadow: 0 0 12px 2px #aaaaaa;
+}
+/*------------------------------------------------------------------------*/
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Utility ]*/
+.txt1 {
+  font-family: Raleway-Regular;
+  font-size: 16px;
+  color: black;
+  line-height: 1.4;
+}
+
+.bo1 {
+  border-bottom: 1px solid #999999;
+}
+
+.hov1:hover {
+  border-color: #d33f8d;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ login ]*/
+
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-login100 {
+  width: 100%;  
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+  background-image: linear-gradient(-45deg, #F5D0A9, #A9F5BC, #CED8F6, #F5A9D0); 
+  z-index: 1;
+}
+
+.container-login100::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  
+  background-color: rgba(255,255,255, 0.2);
+  
+}
+
+.wrap-login100 {
+  position: absolute;
+  width: 450px;
+  height: 590px;
+  margin: auto;
+  background-color: rgba(247,247,247,1);
+  box-shadow: 0 0 10px #aaaaaa;
+  border-radius: 6px;
+  overflow: hidden;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 77px;
+    padding-bottom: 30px;
+    z-index: 1;
+    transition: 0.5s;
+}
+
+#information1, #information2{
+  margin: auto;
+}
+
+
+
+
+/*------------------------------------------------------------------
+[  ]*/
+.login100-form {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.login100-form-title {
+  font-family: Raleway-Black;
+  font-size: 40px;
+  color: #404040;
+  line-height: 1.4;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 5px;
+  transition: 0.7s;
+  cursor: default;
+}
+.login100-form-title2 {
+  font-family: Raleway-Black;
+  font-size: 40px;
+  color: #404040;
+  line-height: 1.4;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+.login100-form-title:hover {
+  border-radius: 6px;
+  transform: scale(1.1, 1.1);
+  box-shadow: 0 0 8px #bbbbbb;
+  background-color: #fefefe;
+}
+.login100-form-body {
+  font-family: Raleway-Black;
+  font-size: 30px;
+  font-weight: bold;
+  width: 78%;
+  margin-left: 11%; 
+  padding: 3px;
+  line-height: 1.8em;
+  color: #404040;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  cursor: default;
+  transition: 0.7s;
+}
+.login100-form-body:hover {
+  border-radius: 6px;
+  transform: scale(1.09, 1.09);
+  box-shadow: 0 0 8px #bbbbbb;
+  background-color: #fefefe;
+}
+
+
+/*---------------------------------------------*/
+.wrap-input100 {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+margin-bottom: 16px;
+border: none;
+}
+
+.input100 {
+  font-family: Raleway-SemiBold;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #686868;
+  display: block;
+  width: 100%;
+  background: rgba(240,240,240,1);
+  height: 62px;
+  border-radius: 6px;
+  padding: 0 30px 0 65px;
+  border: none;
+}
+
+
+
+/*------------------------------------------------------------------
+[ Focus ]*/
+.focus-input100 {
+  display: block;
+  position: absolute;
+  border-radius: 6px;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 0px 0px;
+  color: rgba(54, 207, 61, 0.6);
+}
+
+.input100:focus + .focus-input100 {
+  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
+  animation: anim-shadow 0.5s ease-in-out forwards;
+}
+
+@-webkit-keyframes anim-shadow {
+  to {
+    box-shadow: 0px 0px 60px 20px;
+    opacity: 0;
+  }
+}
+
+@keyframes anim-shadow {
+  to {
+    box-shadow: 0px 0px 60px 20px;
+    opacity: 0;
+  }
+}
+
+.symbol-input100 {
+  font-size: 24px;
+  color: #999999;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  border-radius: 25px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-left: 23px;
+  padding-bottom: 5px;
+  pointer-events: none;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.input100:focus + .focus-input100 + .symbol-input100 {
+  color: rgba(54, 207, 61, 0.6);
+  padding-left: 18px;
+}
+
+/*==================================================================
+[ Restyle Checkbox ]*/
+
+.input-checkbox100 {
+  display: none;
+}
+
+.label-checkbox100 {
+  font-family: Raleway-Regular;
+  font-size: 16px;
+  color: black;
+  line-height: 1.2;
+
+  display: block;
+  position: relative;
+  padding-left: 26px;
+  cursor: pointer;
+}
+
+.label-checkbox100::before {
+  content: "\f00c";
+  font-family: FontAwesome;
+  font-size: 13px;
+  color: transparent;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  background: #fff;
+  border: 2px solid #d33f8d;
+  left: 0;
+  top: 48%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.input-checkbox100:checked + .label-checkbox100::before {
+  color: #d33f8d;
+}
+
+
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-login100-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+    padding-top: 25px;
+}
+
+.login100-form-btn {
+  font-family: Raleway-Bold;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  text-transform: uppercase;
+
+  width: 100%;
+  height: 62px;
+  border-radius: 6px;
+  background-color: rgba(170,170,170,1);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login100-form-btn:hover {
+  background: rgba(130,130,130,1);
+}
+
+/*------------------------------------------------------------------
+[ Button sign in with ]*/
+.btn-face,
+.btn-google {
+  font-family: Raleway-Bold;
+  font-size: 16px;
+  line-height: 1.2;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc((100% - 10px) / 2);
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid #e6e6e6;
+  background-color: #fff;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+
+.btn-face {
+  color: #3b5998;
+}
+
+.btn-face i {
+  font-size: 20px;
+  margin-right: 10px;
+  padding-bottom: 1px;
+}
+
+.btn-google {
+  color: #555555;
+}
+
+.btn-google img {
+  width: 19px;
+  margin-right: 10px;
+  padding-bottom: 1px;
+}
+
+
+.btn-face:hover,
+.btn-google:hover {
+  border-color: #d33f8d;
+}
+#explain_gobutton2 {
+    position: absolute;
+    top:50%;
+    font-size: 45px;
+    left: 4%;
+    color: #888888;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s;
+}
+#explain_gobutton2:hover {
+  color: #333333;
+  text-shadow: 0 0 6px #bbbbbb;
+}
+#explain_gobutton1 {
+    position: absolute;
+    top:50%;
+    font-size: 45px;
+    right: 4%;
+    color: #888888;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s;
+}
+#explain_gobutton1:hover {
+  color: #333333;
+  text-shadow: 0 0 6px #bbbbbb;
+}
+.go_main_Btn
+{
+    display: block;
+    position: absolute;
+    bottom: 7%;
+    padding: 10px 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80%;
+    height: 50px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #333333;
+    font-size: 20px;
+    transition: 0.4s;
+}
+.go_main_Btn:hover {
+    box-shadow: 0 0 8px #888888;
+}
+
+
+/*------------------------------------------------------------------
+[ Alert validate ]*/
+
+.validate-input {
+  position: relative;
+}
+
+.alert-validate::before {
+  content: attr(data-validate);
+  position: absolute;
+  max-width: 70%;
+  background-color: white;
+  border: 1px solid #c80000;
+  border-radius: 3px;
+  padding: 4px 25px 4px 10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right: 8px;
+  pointer-events: none;
+
+  font-family: Raleway-SemiBold;
+  color: #c80000;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: left;
+
+  visibility: hidden;
+  opacity: 0;
+
+  -webkit-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+
+.alert-validate::after {
+  content: "\f12a";
+  font-family: FontAwesome;
+  display: block;
+  position: absolute;
+  color: #c80000;
+  font-size: 15px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  right: 13px;
+}
+
+.alert-validate:hover:before {
+  visibility: visible;
+  opacity: 1;
+}
+
+.mouse_pointer
+{
+  cursor:pointer;
+}
+
+/*상단 버튼 모임*/
+.new_page {
+  display: block;
+  float: right;
+  width: auto;
+  height: auto;
+  margin: 0.5% 0.5%;
+  margin-left: 0px;
+}
+.fa-redo-alt {
+    font-size: 23px;
+}
+.login_button {
+  display: block;
+  float: right;
+  width: auto;
+  height: auto;
+  margin: 0.5% 0.5%;
+  margin-left: 0px;
+}
+.myinfo_button {
+  display: block;
+  float: right;
+  width: auto;
+  height: auto;
+  margin: 0.5% 0.5%;
+  margin-left: 0px;
+}
+.search_button
+{
+  display: block;
+  float: right;
+  width: auto;
+  height: auto;
+  margin: 0.5% 0.5%;
+  margin-left: 0px;
+}
+.location_now
+{
+  display: block;
+  position: absolute;
+  top: 1%;
+  left: 0.5%;
+  width: auto;
+  height: auto;
+}
+.board-title
+{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-top: 0.5%;
+  font-family: Raleway-Black;
+  font-size: 28px;
+  color: #404040;
+  line-height: 1.4;
+  text-transform: uppercase;
+  text-align: center;
+  transition: 0.7s;
+  cursor: default;
+}
+.location_box
+{
+  position: fixed;
+  top: 5%;
+  left: -150px;
+  width: 150px;
+  height: 195px;
+  z-index: 300;
+  background-color: rgba(255,255,255,0);
+  border-radius: 8px;
+  transition: left 1s;
+  
+}
+.location_box_show
+{
+  left: -15px;
+}
+.location_button
+{
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  margin-right: 10px;
+
+}
+
+/*보드*/
+.board1 {
+  background-color: white;
+      opacity: 1;
+      background-size: cover;
+      position: absolute;
+      width: 99%;
+      height: 93%;
+      top: 60px;
+      left: 0.5%;
+      box-shadow: 0px 0px 8px #888888;
+      border-radius: 6px;
+      z-index: 100;
+}
+
+
+
+
+@media screen and (max-width: 1000px) {
+
+  .new_page {
+    position: relative;
+    display: block;
+    float: right;
+    width: auto;
+    height: auto;
+    margin: 2% 1.5%;
+    margin-left: 0px;
+  }
+  .login_button {
+    position: relative;
+    display: block;
+    float: right;
+    width: auto;
+    height: auto;
+    margin: 2% 1.5%;
+    margin-left: 0px;
+  }
+  .myinfo_button {
+    display: block;
+    float: right;
+    width: auto;
+    height: auto;
+    margin: 0.5% 0.5%;
+    margin-left: 0px;
+  }
+  .search_button
+  {
+    position: relative;
+    display: block;
+    float: right;
+    width: auto;
+    height: auto;
+    margin: 2% 1.5%;
+    margin-left: 0px;
+  }
+  .location_now
+  {
+    display: block;
+    position: relative;
+    float: left;
+    width: auto;
+    height: auto;
+    margin: 1.5% 1.5%;
+      
+  }
+  .board1 {
+    background-color: white;
+        opacity: 1;
+        background-size: cover;
+        position: absolute;
+        width: 99%;
+        height: 92%;
+        top: 7%;
+        left: 0.5%;
+        box-shadow: 0px 0px 8px #888888;
+        border-radius: 6px;
+        z-index: 100;
+  }
+  .board-title
+  {
+    display: none;
+  }
+  .wrap-login100 {
+    position: absolute;
+    width: 350px;
+    height: 590px;
+    margin: auto;
+    background-color: rgba(247,247,247,1);
+    box-shadow: 0 0 10px #aaaaaa;
+    border-radius: 6px;
+    overflow: hidden;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 77px;
+      padding-bottom: 30px;
+      z-index: 1;
+      transition: 0.5s;
+  }
+  .login100-form-title {
+    font-family: Raleway-Black;
+    font-size: 30px;
+    color: #404040;
+    line-height: 1.4;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 5px;
+    transition: 0.7s;
+    cursor: default;
+  }
+  .login100-form-body {
+    font-family: Raleway-Black;
+    font-size: 25px;
+    font-weight: bold;
+    width: 78%;
+    margin-left: 11%; 
+    padding: 3px;
+    line-height: 1.8em;
+    color: #404040;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    cursor: default;
+    transition: 0.7s;
+  }
+}
+
+
+.idenfication_test {
+    border-radius: 8px;
+}

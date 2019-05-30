@@ -1,18 +1,385 @@
-<!doctype html>
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/red.css') }}">
-		<!--href="/static/css/red.css" -->
-		<script type = "text/javascript" src = "{{ url_for('static', filename='js/test.js') }}" ></script>
-		<!-- src="/static/js/test.js" -->
+<!DOCTYPE html>
+<html lang="ko">
 
-	</head>
-   <body>
-   
-      <h1>안녕 이건 세자보야 ^노^</h1>
-      <input type = "button" onclick = "sayHello()" value = "Say Hello" />
-      <img src="{{ url_for('static', filename='img/imiml.png') }}" width="100px" height="100px">
-      
+<head>
+	<title>SEJABO</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-   </body>
+	<!--모바일 브라우저 상태바 컬러-->
+	<meta name="theme-color" content="#c6f3d5">
+
+	<!--세자보 탭 아이콘-->
+	<link rel="icon" type="image/png" href="../static/img/icons/favicon.ico" />
+
+	<!-- 부트스트랩-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<!--아이콘-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="../static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+
+	<link rel="stylesheet" type="text/css" href="../static/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="../static/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/vendor/select2/select2.min.css">
+
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/loading.css">
+	<link rel="stylesheet" href="../static/css/magic/dist/magic.css">
+	<link rel="stylesheet" href="../static/css/modal.css">
+
+
+
+</head>
+
+<body>
+	<!--상단 버튼들-->
+	<button id="location_now" type="button" class="btn btn-primary location_now"
+		onclick="location_now();">세종이노센터</button>
+	<button id="new_page" type="button" class="btn btn-info new_page" onclick="refleshPage();">새로고침</button>
+	<button id="search_button" type="button" class="btn btn-secondary search_button" onclick="">검색</button>
+	<button id="login_button" type="button" class="btn btn-secondary login_button" style="display: none">로그인</button>
+	<button id="myinfo_button" type="button" class="btn btn-secondary login_button">내정보</button>
+
+	<!--상단 타이틀-->
+	<div class="board-title">
+		SEJABO
+	</div>
+
+	<!--현재 보드 위치 선택 메뉴-->
+	<div id="location_box" class="location_box">
+		<button id="DYAI" type="button" class="btn btn-primary location_button">세종이노센터</button>
+		<button id="DCG" type="button" class="btn btn-success location_button">학술정보원</button>
+		<button id="GGTG" type="button" class="btn btn-warning location_button">광개토관</button>
+		<button id="YGG" type="button" class="btn btn-danger location_button">율곡관</button>
+	</div>
+
+	<!--로그인 모달-->
+	<div id="login_modal" class="login_modal">
+		<!-- Modal content -->
+		<div id="login_modal_content" class="login_modal_content">
+			<span class="login_modal_close">&times;</span>
+
+			<form class="login100-form validate-form">
+				<span class="login100-form-title p-b-55">
+					Login
+				</span>
+
+				<div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz">
+					<input class="input100" type="text" name="email" placeholder="Email" autocomplete="off">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<span class="lnr lnr-envelope"></span>
+					</span>
+				</div>
+
+				<div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
+					<input class="input100" type="password" name="pass" placeholder="Password" autocomplete="off">
+					<span class="focus-input100"></span>
+					<span class="symbol-input100">
+						<span class="lnr lnr-lock"></span>
+					</span>
+				</div>
+
+				<div class="container-login100-form-btn p-t-25">
+					<button class="login100-form-btn">
+						Login
+					</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+	<!--내정보 모달-->
+	<div id="myinfo_modal" class="myinfo_modal">
+		<!-- Modal content -->
+		<div id="myinfo_modal_content" class="myinfo_modal_content">
+			<div class="myinfo_top">SEJABO&nbsp;&nbsp;계정</div>
+			<span class="myinfo_modal_close">&times;</span>
+			<div id="myinfo_user" class="myinfo_user">
+				<div id="myinfo_user_img" class="myinfo_user_img">
+				</div>
+				<div id="myinfo_user_name" class="myinfo_user_name">
+					김형석
+				</div>
+				<div id="myinfo_user_number" class="myinfo_user_number">
+					<div class="myinfo_user_number_title"><span>학번</span></div>
+					<div id="myinfo_user_number_number" class="myinfo_user_number_number">16011075</div>
+				</div>
+				<div id="myinfo_user_major" class="myinfo_user_major">
+					<div class="myinfo_user_major_title"><span>학과</span></div>
+					<div id="myinfo_user_major_major" class="myinfo_user_major_major">컴퓨터공학과</div>
+				</div>
+				<div id="myinfo_user_post" class="myinfo_user_post">
+					<div id="myinfo_user_post_title" class="myinfo_user_post_title">내가쓴글제목입니다. 바로 그거입니다!</div>
+					<div id="myinfo_user_post_content" class="myinfo_user_post_content">테스트 내용입니다. 내가 쓴 테스트 내용입니다. 제가 쓴
+						테스트 내용입니다.</div>
+					<div id="myinfo_user_post_fix" class="myinfo_user_post_fix" title="수정하기"><i class="fas fa-edit"></i>
+					</div>
+					<div id="myinfo_user_post_delete" class="myinfo_user_post_delete" title="삭제하기"><i
+							class="fas fa-trash"></i></div>
+				</div>
+				<div id="myinfo_user_post_not" class="myinfo_user_post_not" style="display: none">
+					<div class="myinfo_user_post_not_img"><i class="fas fa-walking"></i></div>
+					<div id="myinfo_user_post_write" class="myinfo_user_post_write">
+						포스트 작성&nbsp;<i class="fas fa-pen-nib"></i>
+					</div>
+				</div>
+				<div id="myinfo_user_logout" class="myinfo_user_logout">로그아웃</div>
+			</div>
+			<div id="myinfo_post" class="myinfo_post">
+				<div id="myinfo_post_good_button" class="myinfo_post_good_button myinfo_post_button_click">좋아요 게시물</div>
+				<div id="myinfo_post_bad_button" class="myinfo_post_bad_button">싫어요 게시물</div>
+				<div id="myinfo_post_bigbox" class="myinfo_post_bigbox">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--검색 모달-->
+	<div id="search_modal" class="search_modal">
+		<!-- Modal content -->
+		<div id="search_modal_content" class="search_modal_content">
+			<span class="search_modal_close">&times;</span>
+			<i class="fas fa-search"></i>
+			<input type="text" class="search_modal_textbox" placeholder="입력 후 엔터를 쳐주세요!">
+		</div>
+	</div>
+
+	<!--포스트 모달-->
+	<div id="post_modal" class="post_modal">
+		<!-- Modal content -->
+		<div id="post_modal_content" class="post_modal_content">
+			<button id="share_button" type="button" class="btn btn-secondary share_button" onclick="clipboardCopy();">
+				<i class="fas fa-clone"></i> 보내기</button>
+			<div id="post_top" class="post_top">
+				<div id="post_data_start_title" class="post_data_start_title">게시 기간 :</div>
+				<div id="post_data_start" class="post_data_start"></div>
+				<div id="post_data_between" class="post_data_between">~</div>
+				<div id="post_data_end" class="post_data_end"></div>
+			</div>
+			<span class="post_modal_close">&times;</span>
+			<!--이미지영역-->
+			<div id="post_content_img" class="post_content_img">
+				<div id="post_content_img_content" class="post_content_img_content">
+					<img id="post_content_img_image" class="post_content_img_image"
+						onmouseover="post_content_img_image_over();" onmouseout="post_content_img_image_out();">
+				</div>
+			</div>
+			<!--내용영역-->
+			<div id="post_content_text" class="post_content_text">
+				<div class="profile_img">
+					<!--지우셈-->
+					<img id="idenfication_test" class="idenfication_test" src="" alt="Avatar">
+				</div>
+				<div id="profile_title" class="profile_title"></div>
+				<div class="profile_hr"></div>
+				<div id="post_content_content" class="post_content_content"></div>
+				<div class="profile_hr"></div>
+				<a id="post_content_url" class="post_content_url" target="_blank"><i
+						class="fas fa-external-link-alt"></i>
+					외부링크 바로가기</a>
+				<div id="post_content_good" class="post_content_good"><i class="fas fa-thumbs-up"></i></div>
+				<div id="post_content_bad" class="post_content_bad"><i class="fas fa-thumbs-down"></i></div>
+			</div>
+		</div>
+	</div>
+
+	<!--포스트 관리 모달-->
+	<div id="post_admin_modal" class="post_admin_modal">
+		<!-- Modal content -->
+		<div id="post_admin_modal_content" class="post_admin_modal_content">
+
+			<!--포스트 관리 모달 부 타이틀-->
+			<div id="post_admin_modal_title" class="form-group">
+				<div class="post_admin_top">
+					<h2 id="post_admin_title"   class="post_admin_title">게시글 작성</h2>
+				</div>
+				<span class="post_admin_modal_close">&times;</span>
+			</div>
+
+			<!--포스트 작성 창-->
+			<div id="post_creat" class="form-group">
+				<br>
+				<hr>
+				<div class="form-group">
+					<input class="form-control form-control-lg" type="text" placeholder="제목">
+				</div>
+
+				<div class="form-group">
+					<labelfor="exampleFormControlTextarea1">내 용</label>
+						<textarea class="form-control post_admin_textarea" id="exampleFormControlTextarea1"></textarea>
+				</div>
+				<div class="form-group">
+					<div class="form-group">
+						<label for="exampleFormControlFile1">첨 부 파 일</label>
+						<input type="file" class="form-control-file" id="exampleFormControlFile1">
+					</div>
+				</div>
+			</div>
+
+			<!--포스트 사이즈 선택 창-->
+			<div id="post_select_box" class="form-group post_admin_display_none">
+				<br>
+				<hr>
+				<div class="form-group post_select_box_group">
+					<button id="post_select_box_XL" type="button" class="btn btn-info post_select_box"
+						onclick="">XL</button>
+					<button id="post_select_box_L" type="button" class="btn btn-info post_select_box"
+						onclick="">L</button>
+					<button id="post_select_box_M" type="button" class="btn btn-info post_select_box"
+						onclick="">M</button>
+					<button id="post_select_box_S" type="button" class="btn btn-info post_select_box"
+						onclick="">S</button>
+				</div>
+				<br>
+				<p id="post_warning" style="text-align: center">(실제 게시될 사이즈 입니다)</p>
+				<br>
+				<div class="form-group post_select_img_box">
+					<img id="post_select_box_img" class="post_select_box_img" src="../static/img/SejaboLOGO.png"
+						alt="sejabo">
+				</div>
+			</div>
+
+			<!--포스트 게시 장소/기한 선택 창-->
+			<div id="post_select_date" class="form-group post_admin_display_none">
+				<br>
+				<hr>
+				<div class="form-group post_location">
+					<p>게시 장소 선택</p>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+						<label class="form-check-label" for="inlineCheckbox1">세종이노센터</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+						<label class="form-check-label" for="inlineCheckbox2">학술정보원</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+						<label class="form-check-label" for="inlineCheckbox1">광개토관</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox4 value=" option4">
+						<label class="form-check-label" for="inlineCheckbox1">율곡관</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-group post_select_img_box">
+						<img id="post_select_box_img" class="post_select_box_img" src="../static/img/SejaboLOGO.png"
+							alt="sejabo">
+					</div>
+					<div class="range-slider">
+						<input id="post_admin_modal_date_select" type="range" class="custom-range" orient="vertical"
+							min="0" max="7" value="0" />
+
+						<div class="range-slider__bar">마 감 기 한</div>
+						<div class="range-slider__thumb"></div>
+					</div>
+
+				</div>
+			</div>
+
+			<button id="post_admin_prev_button" type="button"
+				class="btn btn-secondary post_admin_prev_button post_admin_display_none" onclick="">이전</button>
+
+			<button id="post_admin_next_button" type="button" class="btn btn-success post_admin_next_button"
+				onclick="">다음</button>
+
+		</div>
+	</div>
+
+	<!--세자보 메인 모달-->
+	<div id="main_modal" class="modal">
+		<div id="main_modal_box" class="main_modal-box">
+			<span class="close"></span>
+			<div class="container-login100">
+				<div id="main_modal_content" class="wrap-login100">
+					<div id="information1" class="info show_display">
+						<div class="login100-form-title">
+							우리들의 대자보<br>SEJABO
+						</div>
+						<br>
+						<br>
+						<img id="draggable-revert" class="sejong_logo" src="../static/img/SejaboLOGO.png">
+						<br>
+						<br>
+						<br>
+					</div>
+					<div id="information2" class="info2 none_display">
+						<div class="login100-form-title">
+							SEJABO
+						</div>
+						<hr>
+						<br>
+						<div class="login100-form-body">
+							<span style="color: red">언제</span> <span style="color: purple">어디</span>서나!
+						</div>
+						<br>
+						<div class="login100-form-body">
+							<span style="color: skyblue">홍보</span>를 <span style="color: green">쉽게!</span>
+						</div>
+						<br>
+						<div class="login100-form-body">
+							<span style="color: orange">실시간</span>으로!
+						</div>
+					</div>
+					<i id="explain_gobutton1" class="fa fa-angle-right"></i>
+					<i id="explain_gobutton2" class="fa fa-angle-left none_display"></i>
+					<button id="main_modal_btn" class="go_main_Btn">살펴보다</button>
+				</div>
+
+				<div class="cssload-loader-inner">
+					<div class="cssload-cssload-loader-line-wrap-wrap">
+						<div class="cssload-loader-line-wrap"></div>
+					</div>
+					<div class="cssload-cssload-loader-line-wrap-wrap">
+						<div class="cssload-loader-line-wrap"></div>
+					</div>
+					<div class="cssload-cssload-loader-line-wrap-wrap">
+						<div class="cssload-loader-line-wrap"></div>
+					</div>
+					<div class="cssload-cssload-loader-line-wrap-wrap">
+						<div class="cssload-loader-line-wrap"></div>
+					</div>
+					<div class="cssload-cssload-loader-line-wrap-wrap">
+						<div class="cssload-loader-line-wrap"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!--보드 공간-->
+	<div id="media_test" class="board1"></div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+
+
+<script src="../static/vendor/select2/select2.min.js"></script>
+<script src="../static/js/board.js"></script>
+<script src="../static/js/myinfo.js"></script>
+<script src="../static/js/modal.js"></script>
+<script src="../static/js/main.js"></script>
+<script src="../static/js/function.js"></script>
+<script src="../static/js/snackbar.js"></script>
+<script src="../static/js/pnglib.js"></script>
+<script src="../static/js/identicon.js"></script>
+<script src="../static/js/identification.js"></script>
+<script src="../static/js/slider_bar_dynamic.js"></script>
+
+
 </html>
