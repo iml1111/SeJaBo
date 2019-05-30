@@ -30,7 +30,7 @@ function addElement () {
    {'post_id': '22','reg_date':'2019-03-12', 'exp_date':'2019-04-30','title':'세자보 테스트 데이터 입니다. 세종대 대자보 만만세 우리나라 만만세 만세이에이에이','url':'0','content':'WebProgramming and Database Project','img_url':'0','view_count':'0','like_count':'0','dislike_count':'0','size':'1', 'color': '#E0F8EC'}, 
    {'post_id': '33','reg_date':'2019-03-13', 'exp_date':'2019-04-01','title':'세자보 테스트 데이터 입니다. 세종대 대자보 만만세 우리나라 만만세 만세이에이에이','url':'0','content':'WebProgramming and Database Project','img_url':'0','view_count':'0','like_count':'0','dislike_count':'0','size':'1', 'color': '#E0F8EC'}
    ]
-   var box_shape = {'1': ['160', '220'], '2': ['200', '280'], '3': ['280', '360'], '4': ['340', '440']};
+   var box_shape = {'1': ['160', '220'], '2': ['200', '280'], '3': ['260', '360'], '4': ['320', '440']};
    var box_list = [];
    for (var i=0; i<receive_list.length; i++){
       box_list.push(receive_list[i]['size']);
@@ -224,6 +224,7 @@ function addElement () {
          else{
             add_list = [x0y0[0], x0y0[1], x0y0[0] + w, x0y0[1] + h, receive_list[i].post_id];
             box_not_done.push(add_list);
+            n += 1;
          }
       }
    }

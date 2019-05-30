@@ -319,7 +319,7 @@ window.onclick = function (event) {
 $('#post_select_box_XL').click(function(){
   if (navigator.platform) {
     if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
-      $('.post_select_box_img').css('width', '340');
+      $('.post_select_box_img').css('width', '320');
       $('.post_select_box_img').css('height', '440');
     }
     else {
@@ -330,7 +330,7 @@ $('#post_select_box_XL').click(function(){
 $('#post_select_box_L').click(function(){
   if (navigator.platform) {
     if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
-      $('.post_select_box_img').css('width', '280');
+      $('.post_select_box_img').css('width', '260');
       $('.post_select_box_img').css('height', '360');
     }
     else {

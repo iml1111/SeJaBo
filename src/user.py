@@ -25,11 +25,12 @@ def delete_post(post_id):
 
 #게시물 등록하기
 @bp.route('/add_post', methods=["POST"])
-#@jwt_required
+@jwt_required
 def add_post():
 	current_user = select_id(g.db, get_jwt_identity())
 	if current_user is None: abort(400)
 	if current_user['my_post'] is not None: abort(400)
+	#if 
 	#current_user = {"student_id":16011075}
 	build = request.form.getlist('build')
 	title = request.form['title']
@@ -70,7 +71,11 @@ def add_post():
 def modify_post():
 	current_user = select_id(g.db, get_jwt_identity())
 	if current_user is None: abort(400)
-	if current_user['my_post'] is None: abort(400)
+	with g.db.cursor() as cursor:
+		sql = "SELECT * from post where author = %s"
+		cursor.execute(sql, (current_user['select_id'],))
+		result = cursor.fetchone()
+	if result is not None: abort(400)
 	title = request.form['title']
 	content = request.form['content']
 	url = request.form['url']
