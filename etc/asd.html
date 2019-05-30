@@ -1,0 +1,270 @@
+<!--
+The MIT License (MIT)
+Copyright (c) 2015 tibyte.kr
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<!-- http://tibyte.kr/244 -->
+
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<body>
+	<canvas id="canvas1", width=256, height=256, style="border:1px solid #000000"></canvas>
+	<script type = "text/javascript">
+	function Node(element) 
+	{
+		this.data = element;
+		this.right = null;
+		this.left = null;
+	}
+	function List() 
+	{
+		this.length = 0;
+		this.head = new Node(null);
+		this.tail = this.head;
+	}
+	List.prototype.push = function(element)  
+	{
+		var node = this.tail;
+		//while(node.right != null) {
+		//	node = node.right;
+		//}
+		node.right = new Node(element);
+		node.right.left = node;
+		this.tail = node.right;
+		++this.length;
+	}
+	List.prototype.erase = function(node) 
+	{
+		if(node == this.head) {
+			console.log("Do not erase headnode");
+			return;
+		}
+		if(node == this.tail)
+			this.tail = this.tail.left;
+		node.left.right = node.right;
+		if(node.right != null)
+			node.right.left = node.left;
+		--this.length;
+		return node.right;
+	}
+	List.prototype.insert = function(item)
+	{
+		var n = 0;
+		var isFound = false;
+		var newNode = new Node(item);
+		var node = this.head.right;
+		newNode.left = this.head;
+		while(node != null) {
+			++n;
+			if(node.data.w*node.data.h > item.w*item.h) {
+				newNode.left = node;
+				node = node.right;
+			} 
+			else {
+				newNode.right = node;
+				node.left.right =  newNode;
+				node.left = newNode;
+				isFound = true;
+				++this.length;
+				break;
+			}
+		}
+		if(!isFound) {
+			this.push(newNode.data);
+		}
+	
+		return n;
+	}
+	List.prototype.merge = function(list)
+	{
+		if(list.length < 1) return;
+		this.tail.right = list.head.right;
+		list.head.right.left = this.tail;
+		this.tail = list.tail;
+		this.length += list.length;
+	}
+	var testCase = [11, 21, 43, 39, 13, 52, 35, 25, 28, 20, 66, 55, 54, 62, 50, 61, 49, 16, 60, 51, 39, 27, 54, 62, 65, 13, 34, 50, 48, 63, 19, 41, 18, 61, 23, 51, 39, 58, 35, 14, 35, 31, 67, 58, 25, 24, 58, 63, 59, 57, 69, 57, 34, 28, 61, 30, 18, 57, 10, 26, 42, 66, 31, 50, 63, 13, 42, 10, 57, 63, 61, 54, 50, 53, 20, 54, 66, 31, 48, 35, 28, 25, 37, 54, 32, 50, 42, 49, 62, 37, 31, 24, 63, 44, 66, 29, 25, 51, 52, 17, 67, 55, 27, 48, 23, 39, 38, 41, 46, 15, 46, 68, 24, 41, 38, 20, 33, 42, 12, 12, 51, 31, 53, 41, 25, 28, 39, 69, 61, 12, 55, 59, 35, 60, 13, 60, 22, 41, 60, 68, 28, 33, 31, 60, 27, 48, 38, 60, 19, 63, 28, 50, 24, 31, 42, 38, 11, 17, 50, 36, 27, 59, 42, 25, 16, 61, 35, 19, 32, 67, 40, 53, 33, 42, 15, 40, 62, 23, 42, 19, 57, 42, 43, 59, 12, 10, 45, 68, 16, 15, 15, 34, 67, 33, 27, 54, 53, 64, 18, 22];
+	var testCase = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16,16,17,17,18,18,19,19,20,20,21,21,22,22,23,23,24,24,25,25,26,26,27,27,28,28,29,29,30,30,31,31,32,32,33,33,34,34,35,35,36,36,37,37,38,38,39,39,40,40,41,41,42,42,43,43,44,44,45,45,46,46,47,47,48,48,49,49,50,50,51,51,52,52,53,53,54,54,55,55];
+	//var testCase = [160,160,80,80,80,80,60,60,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,16,16,16,16,16,16];
+	//var testCase = [16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16];
+	var canvas = document.getElementById("canvas1");
+	var ctx = canvas.getContext("2d");
+	var numCase = testCase.length/2;
+	var width = canvas.width;
+	var height = canvas.height;
+	var itemList = new List();
+	var spaceList = new List();
+	var n0 = 0;
+	for(var i = 0; i<numCase; i++) {
+		var item = {};
+		item.w = testCase[i*2];
+		item.h = testCase[i*2+1];
+		//itemList.push(item);
+		/*insertion sorting*/
+		n0 += itemList.insert(item);
+		
+	}
+	spaceList.push({x:0, y:0, w:width, h:height});
+	var n1=0, n2=0, n3=0; 
+	var u = 0; //used space
+	var la = 0; //unloaded item
+	var item = itemList.head.right;
+	while(item != null) {
+		var isFound = false;
+		//First fit
+		var space = spaceList.head.right;
+		while(space != null) {
+			++n1;
+			if(item.data.w <= space.data.w && item.data.h <= space.data.h) {
+				isFound = true;
+				break;
+			}
+			space = space.right;
+			
+		}
+		if(isFound) {
+			//attach & draw
+			item.data.x = space.data.x;
+			item.data.y = space.data.y;
+			drawItem(ctx, item.data.x, item.data.y, item.data.w, item.data.h);
+			u += item.data.w*item.data.h;
+			
+			var newList = new List();
+			//check intersect
+			var sp = spaceList.head.right;
+			while(sp != null) {
+				if(isInclude(item.data, sp.data)) {
+					sp = spaceList.erase(sp);
+					continue;
+				}
+				++n2;
+				if(isIntersect(item.data,sp.data)) {
+					//divide
+					var rt = {x:sp.data.x, y:sp.data.y, 
+							  w:sp.data.w, h:item.data.y-sp.data.y};
+					var rb = {x:sp.data.x, y:item.data.y+item.data.h,
+							  w:sp.data.w, h:sp.data.y+sp.data.h-(item.data.y+item.data.h)};
+					var rl = {x:sp.data.x, y:sp.data.y,
+						      w:item.data.x-sp.data.x, h:sp.data.h};
+					var rr = {x:item.data.x+item.data.w, y:sp.data.y,
+							  w:sp.data.x+sp.data.w-(item.data.x+item.data.w), h:sp.data.h};
+					
+					if(rt.w > 0 && rt.h > 0) newList.push(rt);
+					if(rb.w > 0 && rb.h > 0) newList.push(rb);
+					if(rl.w > 0 && rl.h > 0) newList.push(rl);
+					if(rr.w > 0 && rr.h > 0) newList.push(rr);
+					sp = spaceList.erase(sp);
+					continue;
+				}
+				sp = sp.right;				
+			}
+			//remove invalidate spaces
+			var s1, s2;
+			s1 = spaceList.head.right;
+			while(s1 != null) {
+				s2 = newList.head.right;
+				while(s2 != null) {
+					++n3;
+					if(s1!=s2 && isInclude(s1.data,s2.data)) {
+						s2 = newList.erase(s2);
+						continue;
+					}
+					s2 = s2.right;
+				}
+				s1 = s1.right;
+			}
+			s1 = newList.head.right;
+			while(s1 != null) {
+				s2 = newList.head.right;
+				while(s2 != null) {
+					++n3;
+					if(s1!=s2 && isInclude(s1.data,s2.data)) {
+						s2 = newList.erase(s2);
+						continue;
+					}
+					s2 = s2.right;
+				}
+				s1 = s1.right;
+			}
+			spaceList.merge(newList);
+			
+		}//end fit
+		if(!isFound) {
+			la += item.data.w*item.data.h;
+		}
+		item = item.right;
+	}//end item loop
+	//efficiency
+	var e = Math.floor(u/(width*height)*10000)/100; 
+	//ctx.font="32px Consolas bold";
+	//ctx.fillStyle = "#000000";
+	//ctx.fillText(e+"%",50,height-120);
+	//ctx.fillText(n+"회 연산",50,height-90);
+	//ctx.fillText(l+"개 못 넣음",50,height-60);
+	document.write("<br>");
+	document.write("<b>공간 효율 : "+e+"%</b><br>");
+	document.write("연산 횟수 : "+(n0+n1+n2+n3)+"<br>");
+	document.write("적재 면적 : "+u+"<br>");
+	document.write("잔여 면적 : "+la+"<br>");
+	document.write("적재율 : "+(Math.floor(u/(u+la)*10000)/100)+"%<br>");	
+	function drawItem(ctx, x, y, w, h)
+	{
+		var r0 = Math.floor(x/canvas.width*220) + 36;
+		var r1 = Math.floor((x+w)/canvas.width*220) + 36;
+		var g0 = Math.floor(y/canvas.height*220) + 36;
+		var g1 = Math.floor((y+h)/canvas.height*220) + 36;
+		var b0 = Math.floor((1-(x+w+y+h)/(canvas.width+canvas.height))*220) + 36;
+		var b1 = Math.floor((1-(x+w+y+h)/(canvas.width+canvas.height))*220) + 36;
+		
+		var grd = ctx.createLinearGradient(x, y, x+w, y+h);
+	    grd.addColorStop(0, "rgb("+r0+","+g0+","+b0+")");   
+	    grd.addColorStop(1, "rgb("+r1+","+g1+","+b1+")");
+		ctx.beginPath();
+		ctx.rect(x, y, w, h);
+		ctx.fillStyle = grd;
+		ctx.fill(); 
+		ctx.stroke();
+	}
+	function isIntersect(r1, r2)
+	{
+	    if(r1.x >= r2.x+r2.w) return false;
+	    if(r1.x+r1.w <= r2.x) return false;
+	    if(r1.y >= r2.y+r2.h) return false;
+	    if(r1.y+r1.h <= r2.y) return false;
+	    return true;
+	}
+	function isInclude(r1, r2)
+	{
+		if(r2.x >= r1.x && r2.x+r2.w <= r1.x+r1.w &&
+		r2.y >= r1.y && r2.y+r2.h <= r1.y+r1.h)
+			return true;
+		return false;
+	}
+	function getIntersection(r1, r2)
+	{
+		var rect = {};
+		rect.x = Math.max(r1.x, r2.x);
+		rect.y = Math.max(r1.y, r2.y);
+		rect.w = Math.min(r1.x+r1.w, r2.x+r2.w)-rect.x;
+		rect.h = Math.min(r1.y+r1.h, r2.y+r2.h)-rect.y;
+		return rect;
+	}
+	</script>
+	</body>
+</html>
