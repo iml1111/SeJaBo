@@ -77,8 +77,6 @@ def like(post_id,interest):
    g.db.commit()
    return jsonify(result="success")
 
-
-
 #게시물 검색
 @bp.route('/search/<string:words>')
 def search(words):

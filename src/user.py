@@ -111,7 +111,6 @@ def modify_post():
 	g.db.commit()
 	return jsonify(success = "success")
 
-
 #회원정보 반환
 @bp.route('/userinfo')
 @jwt_required
@@ -138,8 +137,6 @@ def get_user():
 		userinfo.update({"dislike_posts":cursor.fetchall()})
 		userinfo.update({"result":"success"})
 	return jsonify(userinfo)
-
-
 
 #로그인/회원가입(토큰발행)
 @bp.route('/login', methods=['POST'])

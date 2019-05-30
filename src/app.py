@@ -28,10 +28,6 @@ def create_app(test_config = None):
 @application.route('/')
 def index():
 	return render_template('index.html')
-#test
-@application.route('/test')
-def index2():
-	return render_template('test.html')
 
 @application.before_request
 def before_request():
