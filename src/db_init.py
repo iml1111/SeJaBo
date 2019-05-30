@@ -55,7 +55,8 @@ def init_db():
 			if not line: break
 			try:
 				cursor.execute(line)
-			except:
+			except Exception as e:
+				print(e)
 				continue
 		#test_case
 		sql = open("sql/test_case.txt","r")
@@ -64,7 +65,8 @@ def init_db():
 			if not line: break
 			try:
 				cursor.execute(line)
-			except:
+			except Exception as e:
+				print(e)
 				continue
 	db.commit()
 	db.close()
