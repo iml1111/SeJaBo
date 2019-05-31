@@ -21,6 +21,8 @@ function A_JAX(url, type, token, data){
             url: url,
             headers: {"Authorization": 'Bearer ' + token },
             data: json_data,
+            processData: false,
+            contentType: false,
             dataType : "json",
             success: function(res){},
             error: function(res){

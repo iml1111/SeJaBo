@@ -1,3 +1,4 @@
+var today_ajax;
 //===========================================
 //스크롤을 통한 동적 변환 함수들
 Date.prototype.format = function (f) {
@@ -66,7 +67,8 @@ Date.prototype.format = function (f) {
         d.setDate(d.getDate()*1 + element.value*1);
   
         var today_ = d.format('yyyy-MM-dd (KS)');
-  
+        today_ajax = d.format('yyyy-MM-dd');
+        
         parent.setAttribute('data-slider-value', element.value);
         let $thumb = parent.querySelector('.range-slider__thumb'),
           $bar = parent.querySelector('.range-slider__bar'),

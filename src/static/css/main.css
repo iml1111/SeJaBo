@@ -806,7 +806,10 @@ border: none;
       z-index: 100;
 }
 
-
+.display_none
+{
+  display: none;
+}
 
 
 @media screen and (max-width: 1000px) {
@@ -822,7 +825,6 @@ border: none;
   }
   .login_button {
     position: relative;
-    display: block;
     float: right;
     width: auto;
     height: auto;
@@ -830,7 +832,6 @@ border: none;
     margin-left: 0px;
   }
   .myinfo_button {
-    display: block;
     float: right;
     width: auto;
     height: auto;
@@ -916,6 +917,10 @@ border: none;
     cursor: default;
     transition: 0.7s;
   }
+  .box_fa30 {font-size: 14px;} 
+  .box_fa40 {font-size: 15px;}
+  .box_fa60 {font-size: 20px;}
+  .box_fa80 {font-size: 30px;}
 }
 
 

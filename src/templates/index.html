@@ -40,8 +40,8 @@
 		onclick="location_now();">세종이노센터</button>
 	<button id="new_page" type="button" class="btn btn-info new_page" onclick="refleshPage();">새로고침</button>
 	<button id="search_button" type="button" class="btn btn-secondary search_button" onclick="">검색</button>
-	<button id="login_button" type="button" class="btn btn-secondary login_button" style="display: none">로그인</button>
-	<button id="myinfo_button" type="button" class="btn btn-secondary login_button">내정보</button>
+	<button id="login_button" type="button" class="btn btn-secondary login_button display_none">로그인</button>
+	<button id="myinfo_button" type="button" class="btn btn-secondary myinfo_button display_none">내정보</button>
 
 	<!--상단 타이틀-->
 	<div class="board-title">
@@ -62,13 +62,13 @@
 		<div id="login_modal_content" class="login_modal_content">
 			<span class="login_modal_close">&times;</span>
 
-			<form class="login100-form validate-form">
+			<div class="login100-form validate-form">
 				<span class="login100-form-title p-b-55">
-					Login
+					로그인
 				</span>
 
 				<div class="wrap-input100 validate-input m-b-16" data-validate="Valid email is required: ex@abc.xyz">
-					<input class="input100" type="text" name="email" placeholder="Email" autocomplete="off">
+					<input class="input100" type="text" name="student_ID" placeholder="학번" autocomplete="off">
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
 						<span class="lnr lnr-envelope"></span>
@@ -76,7 +76,7 @@
 				</div>
 
 				<div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
-					<input class="input100" type="password" name="pass" placeholder="Password" autocomplete="off">
+					<input class="input100" type="password" name="student_PW" placeholder="비밀번호" autocomplete="off">
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
 						<span class="lnr lnr-lock"></span>
@@ -84,11 +84,11 @@
 				</div>
 
 				<div class="container-login100-form-btn p-t-25">
-					<button class="login100-form-btn">
-						Login
+					<button class="login100-form-btn" onclick="sejabo_login()">
+						로그인
 					</button>
 				</div>
-			</form>
+			</div>
 
 		</div>
 	</div>
@@ -154,7 +154,7 @@
 		<!-- Modal content -->
 		<div id="post_modal_content" class="post_modal_content">
 			<button id="share_button" type="button" class="btn btn-secondary share_button" onclick="clipboardCopy();">
-				<i class="fas fa-clone"></i> 보내기</button>
+				<i class="fas fa-clone"></i></button>
 			<div id="post_top" class="post_top">
 				<div id="post_data_start_title" class="post_data_start_title">게시 기간 :</div>
 				<div id="post_data_start" class="post_data_start"></div>
@@ -196,7 +196,7 @@
 			<!--포스트 관리 모달 부 타이틀-->
 			<div id="post_admin_modal_title" class="form-group">
 				<div class="post_admin_top">
-					<h2 id="post_admin_title"   class="post_admin_title">게시글 작성</h2>
+					<h2 id="post_admin_title"   class="post_admin_title" onclick="post_submit()">게시글 작성</h2>
 				</div>
 				<span class="post_admin_modal_close">&times;</span>
 			</div>
@@ -206,34 +206,35 @@
 				<br>
 				<hr>
 				<div class="form-group">
-					<input class="form-control form-control-lg" type="text" placeholder="제목">
+					<input id="post_creat_title" class="form-control form-control-lg" type="text" placeholder="제목">
 				</div>
 
 				<div class="form-group">
 					<labelfor="exampleFormControlTextarea1">내 용</label>
-						<textarea class="form-control post_admin_textarea" id="exampleFormControlTextarea1"></textarea>
+						<textarea class="form-control post_admin_textarea" id="post_creat_textarea"></textarea>
 				</div>
 				<div class="form-group">
 					<div class="form-group">
+						<input id = "post_creat_URL" class="form-control form-control-sm" type="url" placeholder="첨부링크">
 						<label for="exampleFormControlFile1">첨 부 파 일</label>
-						<input type="file" class="form-control-file" id="exampleFormControlFile1">
+						<input type="file" class="form-control-file" id="post_creat_file">
 					</div>
 				</div>
 			</div>
 
 			<!--포스트 사이즈 선택 창-->
-			<div id="post_select_box" class="form-group post_admin_display_none">
+			<div id="post_select_box" class="form-group display_none">
 				<br>
 				<hr>
 				<div class="form-group post_select_box_group">
 					<button id="post_select_box_XL" type="button" class="btn btn-info post_select_box"
-						onclick="">XL</button>
+						onclick="BOX_XL()">XL</button>
 					<button id="post_select_box_L" type="button" class="btn btn-info post_select_box"
-						onclick="">L</button>
+						onclick="BOX_L()">L</button>
 					<button id="post_select_box_M" type="button" class="btn btn-info post_select_box"
-						onclick="">M</button>
+						onclick="BOX_M()">M</button>
 					<button id="post_select_box_S" type="button" class="btn btn-info post_select_box"
-						onclick="">S</button>
+						onclick="BOX_S()">S</button>
 				</div>
 				<br>
 				<p id="post_warning" style="text-align: center">(실제 게시될 사이즈 입니다)</p>
@@ -245,26 +246,26 @@
 			</div>
 
 			<!--포스트 게시 장소/기한 선택 창-->
-			<div id="post_select_date" class="form-group post_admin_display_none">
+			<div id="post_select_date" class="form-group display_none">
 				<br>
 				<hr>
 				<div class="form-group post_location">
 					<p>게시 장소 선택</p>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-						<label class="form-check-label" for="inlineCheckbox1">세종이노센터</label>
+						<input id="build_checkbox0" class="form-check-input" type="checkbox" value="dae">
+						<label class="form-check-label" for="build_checkbox0">세종이노센터</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-						<label class="form-check-label" for="inlineCheckbox2">학술정보원</label>
+						<input id="build_checkbox1" class="form-check-input" type="checkbox" value="hak">
+						<label class="form-check-label" for="build_checkbox1">학술정보원</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-						<label class="form-check-label" for="inlineCheckbox1">광개토관</label>
+						<input id="build_checkbox2" class="form-check-input" type="checkbox" value="gwang">
+						<label class="form-check-label" for="build_checkbox2">광개토관</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="checkbox" id="inlineCheckbox4 value=" option4">
-						<label class="form-check-label" for="inlineCheckbox1">율곡관</label>
+						<input id="build_checkbox3" class="form-check-input" type="checkbox" value="yul">
+						<label class="form-check-label" for="build_checkbox3">율곡관</label>
 					</div>
 				</div>
 				<div class="form-group">
@@ -284,13 +285,53 @@
 			</div>
 
 			<button id="post_admin_prev_button" type="button"
-				class="btn btn-secondary post_admin_prev_button post_admin_display_none" onclick="">이전</button>
+				class="btn btn-secondary post_admin_prev_button display_none">이전</button>
 
-			<button id="post_admin_next_button" type="button" class="btn btn-success post_admin_next_button"
-				onclick="">다음</button>
+			<button id="post_admin_next_button" type="button" class="btn btn-success post_admin_next_button">다음</button>
+			
+			<button id="post_admin_submit_button" type="button" class="btn btn-success post_admin_submit_button display_none"
+				onclick="post_submit()">완료</button>
 
 		</div>
 	</div>
+
+	<!--포스트 수정 모달-->
+	<div id="post_edit_modal" class="post_edit_modal">
+			<!-- Modal content -->
+			<div id="post_edit_modal_content" class="post_edit_modal_content">
+	
+				<!--포스트 관리 모달 부 타이틀-->
+				<div id="post_edit_modal_title" class="form-group">
+					<div class="post_edit_modal_top">
+						<h2 id="post_edit_title"   class="post_edit_title">게시글 수정</h2>
+					</div>
+					<span class="post_edit_modal_close">&times;</span>
+				</div>
+	
+				<!--포스트 수정 창-->
+				<div id="post_edit" class="form-group">
+					<br>
+					<hr>
+					<div class="form-group">
+						<input class="form-control form-control-lg" type="text" placeholder="제목">
+					</div>
+	
+					<div class="form-group">
+						<labelfor="exampleFormControlTextarea1">내 용</label>
+							<textarea class="form-control post_edit_textarea" id="exampleFormControlTextarea1"></textarea>
+					</div>
+					<div class="form-group">
+						<div class="form-group">
+							<input id = "post_edit_URL" class="form-control form-control-sm" type="text" placeholder="첨부링크">
+						</div>
+					</div>
+				</div>
+	
+				<button id="post_edit_button" type="button" class="btn btn-success post_edit_button"
+					onclick="">수정하기</button>
+	
+			</div>
+		</div>
 
 	<!--세자보 메인 모달-->
 	<div id="main_modal" class="modal">
@@ -355,31 +396,44 @@
 	</div>
 
 	<!--보드 공간-->
-	<div id="media_test" class="board1"></div>
+	<div id="board1" class="board1"></div>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
+<!-- JQuery JS -->
+<script src="/static/js/jquery/jquery.min.js"></script>
 
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
+<!-- Bootstrap JS -->
+<script type="text/javascript" src="/static/js/bootstrap/bootstrap.min.js"></script>
+
+<!-- ?? -->
 <script src="../static/vendor/select2/select2.min.js"></script>
+
+<!-- Board JS -->
 <script src="../static/js/board.js"></script>
+
+<!-- Design JS -->
 <script src="../static/js/myinfo.js"></script>
 <script src="../static/js/modal.js"></script>
 <script src="../static/js/main.js"></script>
 <script src="../static/js/function.js"></script>
+
+<!-- Snackbar JS -->
 <script src="../static/js/snackbar.js"></script>
+
+<!-- Identification JS -->
 <script src="../static/js/pnglib.js"></script>
 <script src="../static/js/identicon.js"></script>
 <script src="../static/js/identification.js"></script>
+
+<!-- SliderBar JS -->
 <script src="../static/js/slider_bar_dynamic.js"></script>
 
+<!-- AJAX JS -->
+<script src="../static/js/ajax.js"></script>
+<script src="../static/js/user_ajax.js"></script>
+<script src="../static/js/post_ajax.js"></script>
 
 </html>

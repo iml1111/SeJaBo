@@ -11,7 +11,7 @@ bp = Blueprint('user', __name__)
 UPLOAD_PATH = "/static/img_save/"
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 BUILD_LIST = {"dae":101, "gwang":102, "hak":103, "yul":104}
-EXP_DATE_dict = {1:7, 2:10, 3:15, 4:20}
+EXP_DATE_dict = {1:20, 2:15, 3:10, 4:7}
 
 #게시물 삭제
 @bp.route('/delete_post/<int:post_id>')
@@ -31,12 +31,10 @@ def delete_post(post_id):
 def add_post():
    current_user = select_id(g.db, get_jwt_identity())
    if current_user is None: abort(403)
-   print(current_user['student_id'])
    with g.db.cursor() as cursor:
       sql = "SELECT * from post where author = %s"
       cursor.execute(sql, (current_user['student_id'],))
       result = cursor.fetchone()
-    
    if current_user['student_id'] != 16011089 and result is not None: abort(400)
    build = request.form['build']
    build = build.split(",")
@@ -46,10 +44,13 @@ def add_post():
    exp_date = request.form['exp_date']
    url = request.form.get('url')
    if url == "": url = None
-   if not all(i in build for i in build): abort(400)
-   if not (len(title) >= 1 and len(title) <= 500): abort(400)
-   if size not in ["1","2","3","4",1,2,3,4]: abort(400)
-   if get_add_day(EXP_DATE_dict[size]) < exp_date: abort(400)
+   if not all(i in build for i in build):
+   	abort(400)
+   if not (len(title) >= 1 and len(title) <= 500):
+   	abort(400)
+   if size not in [1,2,3,4]: abort(400)
+   if get_add_day(EXP_DATE_dict[size]) < exp_date:
+   	abort(400)
    try:
       datetime.datetime.strptime(exp_date,"%Y-%m-%d")
    except:
@@ -57,9 +58,9 @@ def add_post():
    if url is not None and url.startswith("http") is False: abort(400)
    img = request.files.get('img_url')
    if img is not None:
-   	filename = str(current_user['student_id']) + "." + secure_filename(img.filename).split(".")[-1]
-   	if not allowed_file(filename): abort(400)
-   	img.save("." + UPLOAD_PATH + filename)
+      filename = str(current_user['student_id']) + "." + secure_filename(img.filename).split(".")[-1]
+      if not allowed_file(filename): abort(400)
+      img.save("." + UPLOAD_PATH + filename)
    else: 
       filename = None
    if filename is not None and allowed_file(filename) is False: abort(400)
@@ -75,10 +76,14 @@ def add_post():
    with g.db.cursor() as cursor:
       sql = "insert into post values(default,%s,now(),%s,%s,%s,%s,%s,0,%s);"
       cursor.execute(sql, input_tuple)
+      sql = "SELECT post_id FROM post ORDER BY post_id DESC LIMIT 1;"
+      cursor.execute(sql)
+      result = cursor.fetchone()
       for i in build:
-         sql = "insert into post_building values(%s,\
-         (select post_id from v_post where author = %s LIMIT 1));"
-         cursor.execute(sql,(BUILD_LIST[i],current_user['student_id']))
+      	print(BUILD_LIST[i],result["post_id"])
+      	sql = "insert into post_building values(%s,%s);"
+      	cursor.execute(sql,(BUILD_LIST[i],result["post_id"]))
+
    g.db.commit()
    return jsonify(result = "success")
 

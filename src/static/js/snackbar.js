@@ -21,11 +21,3 @@ function show_snackbar(temp2) {
     }, 3000);
 
 }
-
-
-var test_snackbar = document.getElementById("new_page");
-
-test_snackbar.onclick = function() {
-    snackbar('새로고침 스낵바 테스트입니다.');
-    refleshPage();
-}
