@@ -12,7 +12,7 @@ url = "http://localhost/mod_post"
 data = {
 #POST
 "id":"16011089",
-"pw":"!hkw10256",
+"pw":"asdf",
 "title":"qsc",
 "content":"asdcasdwe",
 "url":"asd"
