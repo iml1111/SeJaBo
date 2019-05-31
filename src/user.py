@@ -13,6 +13,8 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 BUILD_LIST = {"dae":101, "gwang":102, "hak":103, "yul":104}
 EXP_DATE_dict = {1:20, 2:15, 3:10, 4:7}
 
+#수정에서 이미 있는 게시물 방식 생각하기
+
 #게시물 삭제
 @bp.route('/delete_post/<int:post_id>')
 @jwt_required
@@ -38,6 +40,7 @@ def add_post():
    if current_user['student_id'] != 16011089 and result is not None: abort(400)
    build = request.form['build']
    build = build.split(",")
+   if len(build) == 0: abort(400)
    title = request.form['title']
    content = request.form['content']
    size = int(request.form['size'])
@@ -45,12 +48,12 @@ def add_post():
    url = request.form.get('url')
    if url == "": url = None
    if not all(i in build for i in build):
-   	abort(400)
+      abort(400)
    if not (len(title) >= 1 and len(title) <= 500):
-   	abort(400)
+      abort(400)
    if size not in [1,2,3,4]: abort(400)
    if get_add_day(EXP_DATE_dict[size]) < exp_date:
-   	abort(400)
+      abort(400)
    try:
       datetime.datetime.strptime(exp_date,"%Y-%m-%d")
    except:
@@ -80,10 +83,8 @@ def add_post():
       cursor.execute(sql)
       result = cursor.fetchone()
       for i in build:
-      	print(BUILD_LIST[i],result["post_id"])
-      	sql = "insert into post_building values(%s,%s);"
-      	cursor.execute(sql,(BUILD_LIST[i],result["post_id"]))
-
+         sql = "insert into post_building values(%s,%s);"
+         cursor.execute(sql,(BUILD_LIST[i],result["post_id"]))
    g.db.commit()
    return jsonify(result = "success")
 
@@ -93,31 +94,39 @@ def add_post():
 def modify_post():
    current_user = select_id(g.db, get_jwt_identity())
    if current_user is None: abort(403)
+   
    with g.db.cursor() as cursor:
       sql = "SELECT * from post where author = %s"
-      cursor.execute(sql, (current_user['select_id'],))
+      cursor.execute(sql, (current_user['student_id'],))
       result = cursor.fetchone()
-   if result is not None: abort(400)
+   if result is None:
+      abort(400)
+   print("sad")
+   print(request.form.get('title'))
    title = request.form['title']
    content = request.form['content']
    url = request.form.get('url')
    if url == "": url = None
-   if not (len(title) >= 1 and len(title) <= 500): abort(400)
-   if len(content) == 0: abort(400)
-   if url is not None and url.startswith("http") is False: abort(400)
+   if not (len(title) >= 1 and len(title) <= 500):
+      abort(400)
+   if len(content) == 0:
+      abort(400)
+   if url is not None and url.startswith("http") is False:
+      abort(400)
    input_tuple = (
       title,
       content,
       url,
       current_user['student_id']
    )
+   
    with g.db.cursor() as cursor:
       sql = "UPDATE post \
       SET title = %s, content = %s, url = %s \
       WHERE author = %s"
       cursor.execute(sql, input_tuple)
    g.db.commit()
-   return jsonify(success = "success")
+   return jsonify(result = "success")
 
 #회원정보 반환
 @bp.route('/userinfo')
