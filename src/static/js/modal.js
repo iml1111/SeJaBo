@@ -109,19 +109,12 @@ var myinfo_post_bad_cnt = 0;
 
 // When the user clicks the button, open the modal
 myinfo_button.onclick = function () {
+  $('#myinfo_post_bigbox').empty();
+  get_user_info();
   myinfo_modal.style.display = "block";
+  $('#myinfo_post_bigbox').empty();
   $('#myinfo_modal_content').addClass("magictime");
   $('#myinfo_modal_content').addClass("spaceInDown");
-  if (myinfo_post_good_cnt == 1){
-    remove_myinfo_post_contents();
-    get_user_info();
-    likeDivMake(user_LIKE_POSTS);
-  }
-  else if (myinfo_post_bad_cnt == 1){
-    remove_myinfo_post_contents();
-    get_user_info();
-    likeDivMakeNot(user_DISLIKE_POSTS);
-  }
 }
 // When the user clicks on <span> (x), close the modal
 myinfo_modal_close.onclick = function () {

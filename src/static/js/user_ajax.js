@@ -74,6 +74,17 @@ function myinfo_user_page(json)
     {
         user_DISLIKE_POSTS.push(json['dislike_posts'][i]);
     }
+
+    if (myinfo_post_good_cnt == 1){
+        $('#myinfo_post_bigbox').empty();
+        remove_myinfo_post_contents();
+        likeDivMake(user_LIKE_POSTS);
+      }
+      else if (myinfo_post_bad_cnt == 1){
+        $('#myinfo_post_bigbox').empty();
+        remove_myinfo_post_contents();
+        likeDivMakeNot(user_DISLIKE_POSTS);
+      }
 }
 
 
@@ -87,10 +98,8 @@ function get_user_info()
         $.when(a_jax).done(function () {
             user_info = a_jax.responseJSON;
             var json = a_jax.responseJSON;
-            if (json['result'] == "success") {
-                
+            if (json['result'] == "success") {                
                 myinfo_user_page(json);
-                
             }
             else{
                 alert("자동 로그인에 실패했습니다. 다시 로그인 해주세요.");
