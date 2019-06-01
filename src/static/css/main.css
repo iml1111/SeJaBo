@@ -1,4 +1,7 @@
 /*템플릿 뜯어올 때 폰트임 현재는 유지 시켜놓았는데 나중에 구글 폰트를 통해서 수정 해야함.*/
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean');
+
 @font-face {
   font-family: Poppins-Regular;
   src: url('/static/fonts/poppins/Poppins-Regular.ttf'); 
@@ -44,7 +47,7 @@
 
 body, html {
 	height: 100%;
-  font-family: Poppins-Regular, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   background-image: linear-gradient(-45deg, #F5D0A9, #A9F5BC, #CED8F6, #F5A9D0);
   z-index: -1;
   overflow: hidden;
@@ -53,7 +56,7 @@ body, html {
 /*부분 요소 스타일 템플릿 디자인을 유지*/
 /*원래는 p-l-50과 같이 하나하나 다 들어있는 css를 필요한 값만 추가시키고 기존 p-l-50과 같이 들어있는 css파일은 삭제함.*/
 a {
-	font-family: Poppins-Regular;
+	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -131,7 +134,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 p {
-	font-family: Poppins-Regular;
+	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -185,11 +188,12 @@ iframe {
   z-index: 250;
   transition: 0.3s;
   transition-timing-function: ease-in-out;
+  padding: 10px;
 }
 .box_css_text {
-  font-family: Raleway-Black;
+  font-family: 'Noto Sans KR', sans-serif;
   text-shadow: 0 1px 2px #222222;
-  font-weight: lighter;
+  font-weight: bold;
   overflow: hidden;
   word-break: break-all;
   color: #444444;
@@ -213,7 +217,7 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
-  font-family: Raleway-Regular;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
   color: black;
   line-height: 1.4;
@@ -305,7 +309,7 @@ iframe {
 }
 
 .login100-form-title {
-  font-family: Raleway-Black;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 40px;
   color: #404040;
   line-height: 1.4;
@@ -316,7 +320,7 @@ iframe {
   cursor: default;
 }
 .login100-form-title2 {
-  font-family: Raleway-Black;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 40px;
   color: #404040;
   line-height: 1.4;
@@ -332,7 +336,7 @@ iframe {
   background-color: #fefefe;
 }
 .login100-form-body {
-  font-family: Raleway-Black;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 30px;
   font-weight: bold;
   width: 78%;
@@ -364,7 +368,7 @@ border: none;
 }
 
 .input100 {
-  font-family: Raleway-SemiBold;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 18px;
   line-height: 1.2;
   color: #686868;
@@ -452,7 +456,7 @@ border: none;
 }
 
 .label-checkbox100 {
-  font-family: Raleway-Regular;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
   color: black;
   line-height: 1.2;
@@ -465,7 +469,7 @@ border: none;
 
 .label-checkbox100::before {
   content: "\f00c";
-  font-family: FontAwesome;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 13px;
   color: transparent;
 
@@ -511,7 +515,7 @@ border: none;
 }
 
 .login100-form-btn {
-  font-family: Raleway-Bold;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #fff;
@@ -544,7 +548,7 @@ border: none;
 [ Button sign in with ]*/
 .btn-face,
 .btn-google {
-  font-family: Raleway-Bold;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
   line-height: 1.2;
 
@@ -666,7 +670,7 @@ border: none;
   right: 8px;
   pointer-events: none;
 
-  font-family: Raleway-SemiBold;
+  font-family: 'Noto Sans KR', sans-serif;
   color: #c80000;
   font-size: 13px;
   line-height: 1.4;
@@ -683,7 +687,7 @@ border: none;
 
 .alert-validate::after {
   content: "\f12a";
-  font-family: FontAwesome;
+  font-family: 'Noto Sans KR', sans-serif;
   display: block;
   position: absolute;
   color: #c80000;
@@ -759,7 +763,7 @@ border: none;
   left: 50%;
   transform: translate(-50%, 0);
   margin-top: 0.5%;
-  font-family: Raleway-Black;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 28px;
   color: #404040;
   line-height: 1.4;
@@ -898,7 +902,7 @@ border: none;
       transition: 0.5s;
   }
   .login100-form-title {
-    font-family: Raleway-Black;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 30px;
     color: #404040;
     line-height: 1.4;
@@ -909,7 +913,7 @@ border: none;
     cursor: default;
   }
   .login100-form-body {
-    font-family: Raleway-Black;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 25px;
     font-weight: bold;
     width: 78%;
@@ -931,11 +935,12 @@ border: none;
      z-index: 250;
      transition: 0.3s;
      transition-timing-function: ease-in-out;
+     padding: 5px;
    }
    .box_css_text {
-     font-family: Raleway-Black;
+     font-family: 'Noto Sans KR', sans-serif;
      text-shadow: 0 0px 0px rgba(0,0,0,0);
-     font-weight: lighter;
+     font-weight: bold;
      overflow: hidden;
      word-break: break-all;
      color: #444444;

@@ -517,7 +517,7 @@ function get_post_content(post_id) {
          var hash__ = MD5(receive_list_post_one['author_id']+"");
          var data__ = new Identicon(hash__, img_options).toString();
          $('#profile_img_id').attr("src", "data:image/png;base64," + data__);
-         $('#profile_img_id').attr("title", new_post_box['author_major'] +" "+ new_post_box['author_id'] +" "+ new_post_box['author_name']);
+         $('#profile_img_id').attr("data-original-title", new_post_box['author_major'] +" "+ new_post_box['author_id'] +" "+ new_post_box['author_name']);
          var new_post_box_date_start = new Date(new_post_box['reg_date']+'+0900');
          var new_post_box_date_end = new Date(new_post_box['exp_date']+'+0900');
          var post_year_start = new_post_box_date_start.getFullYear();
@@ -612,7 +612,7 @@ function get_post_content(post_id) {
          var hash__ = MD5(receive_list_post_one['author_id']+"");
          var data__ = new Identicon(hash__, img_options).toString();
          $('#profile_img_id').attr("src", "data:image/png;base64," + data__);
-         $('#profile_img_id').attr("title", new_post_box['author_major'] +" "+ new_post_box['author_id'] +" "+ new_post_box['author_name']);
+         $('#profile_img_id').attr("data-original-title", new_post_box['author_major'] +" "+ new_post_box['author_id'] +" "+ new_post_box['author_name']);
          document.getElementById('post_modal_content').setAttribute('title', new_post_box['post_id']);
          var new_post_box_date_start = new Date(new_post_box['reg_date']+'+0900');
          var new_post_box_date_end = new Date(new_post_box['exp_date']+'+0900');
@@ -729,7 +729,7 @@ function remove_post_content() {
          //post_content_text 원상복구 작업
          document.getElementById('post_content_text').style.width="100%";
          //post_top 원상복구 작업
-         document.getElementById('post_top').style.width="73%";
+         document.getElementById('post_top').style.width="200px";
          //share_button 원상복구 작업
          document.getElementById('share_button').style.marginLeft="10px";
          document.getElementById('share_button').style.marginTop="15px";

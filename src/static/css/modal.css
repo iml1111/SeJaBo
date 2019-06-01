@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean');
 /*=====================================================*/
 /*공통 모달 요소*/
 .none_display{
@@ -86,7 +87,7 @@ box-shadow: 0 0 8px  #888888;
 /* ======================================================== */
 /* 내정보 모달 */
 .myinfo_modal {
-  font-family: Raleway-Black;
+  font-family: 'Noto Sans KR', sans-serif;
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 900; /* Sit on top */
@@ -594,7 +595,7 @@ box-shadow: 0 0 8px  #888888;
  /* ======================================================== */
 /* 포스트모달 */
 .post_modal {
-  font-family: Raleway-Black;
+  font-family: 'Noto Sans KR', sans-serif;
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 900; /* Sit on top */
@@ -1155,7 +1156,7 @@ label {
   /* ======================================================== */
   /* 포스트모달 = 모바일*/
   .post_modal {
-    font-family: Raleway-Black;
+    font-family: 'Noto Sans KR', sans-serif;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 900; /* Sit on top */
@@ -1205,7 +1206,7 @@ label {
   }
   .post_top {
     position: absolute;
-    width: 73%;
+    width: 200px;
     height: 40px;
     left: 50%;
     top: 0;
@@ -1216,6 +1217,7 @@ label {
     border-radius: 8px;
     cursor: default;
     transition: 0.4s;
+    font-weight: bold;
   }
   .post_top:hover {
     transform: translate(-53%, 0) scale(1.06, 1.06);
@@ -1225,7 +1227,7 @@ label {
     float: left;
     font-size: 15px;
     color: #333333;
-    margin-left: 60px;
+    margin-left: 15px;
   }
   .post_data_between {
     float: left;
@@ -1313,6 +1315,7 @@ label {
     width: 80%;
     height: 50px;
     font-size: 20px;
+    font-weight: bold;
     color: #333333;
     background-color: rgba(220,220,220,0.5);
     border-radius: 8px;
@@ -1426,7 +1429,7 @@ label {
   /* ======================================================== */
   /* 내정보 모달  = 모바일*/
   .myinfo_modal {
-    font-family: Raleway-Black;
+    font-family: 'Noto Sans KR', sans-serif;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 900; /* Sit on top */
