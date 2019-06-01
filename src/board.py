@@ -66,7 +66,9 @@ def like(post_id,interest):
       ## 이미 호감이 등록되어있는 게시물에 똑같이 호감을 등록할 경우.
       ## 이미 비호감이 등록되어있는 게시물에 똑같이 비호감을 등록할 경우.
          if result['interest']==interest:
-            return jsonify(result="success",comment="already")
+            sql = 'DELETE FROM like_dislike where post_id=%s and student_id =%s'
+            cursor.execute(sql,(post_id, current_user['student_id']))
+            return jsonify(result="success")
          else:
             if result['interest']==0:
                sql="UPDATE like_dislike set interest=1 where student_id=%s and interest=0 and post_id=%s;"
