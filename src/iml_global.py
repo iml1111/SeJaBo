@@ -20,7 +20,7 @@ def schedule_init():
 	t_zone = get_localzone()
 	scheduler = BackgroundScheduler()
 	#scheduler.add_job(func = test_bg, trigger = "interval", seconds = 1, timezone = t_zone)
-	scheduler.add_job(func = auto_remove, trigger = "interval", seconds = 5, timezone = t_zone)
+	scheduler.add_job(func = auto_remove, trigger = "interval", minutes = 5, timezone = t_zone)
 	# weeks, days, hours, minutes, seconds
 	# start_date='2010-10-10 09:30', end_date='2014-06-15 11:00'
 	scheduler.start()
@@ -40,7 +40,6 @@ def auto_remove():
 		cursor.execute(sql, (get_today(),))
 	db.commit()
 	db.close()
-	print("Remove Complete")
 
 ########## 공통 사용 함수 ##########
 def get_today():

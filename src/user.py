@@ -37,7 +37,8 @@ def add_post():
       sql = "SELECT * from post where author = %s"
       cursor.execute(sql, (current_user['student_id'],))
       result = cursor.fetchone()
-   if current_user['student_id'] != 16011089 and result is not None: abort(400)
+   if current_user['student_id'] not in [16011089,16011075, 16011092] and result is not None:
+         abort(400)
    build = request.form['build']
    build = build.split(",")
    if len(build) == 0: abort(400)
@@ -96,7 +97,7 @@ def modify_post():
    if current_user is None: abort(403)
    
    with g.db.cursor() as cursor:
-      sql = "SELECT * from post where author = %s"
+      sql = "SELECT * from post where author = %s LIMIT"
       cursor.execute(sql, (current_user['student_id'],))
       result = cursor.fetchone()
    if result is None:

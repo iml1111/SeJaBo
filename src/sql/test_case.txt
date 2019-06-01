@@ -2,7 +2,7 @@ insert into sjb.user values(15012015,'gaesakki',3,'천동주');
 insert into sjb.user values(15010019,'sex',4,'이장원');
 insert into sjb.user values(17031009,'michin',9,'김상현');
 insert into sjb.post values(1,15010019,'2019-04-12 19:00:10','2019-07-15 13:15:00','test1','test111',NULL,NULL,1,1);
-insert into sjb.post values(6,15012015,'2019-05-01 19:00:10','2019-06-12 13:15:00','test6','test666',NULL,NULL,6,2);
+insert into sjb.post values(6,15012015,'2019-05-01 19:00:10','2019-05-12 13:15:00','test6','test666',NULL,NULL,6,2);
 insert into sjb.post values(7,17031009,'2019-04-23 19:00:10','2019-06-12 13:15:00','test7','test7',NULL,NULL,7,2);
 insert into sjb.like_dislike values(15012015,6,1);
 insert into sjb.like_dislike values(15012015,2,1);

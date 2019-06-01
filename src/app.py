@@ -19,7 +19,7 @@ jwt = JWTManager(application)
 def create_app(test_config = None):
 	init_db()
 	#백그라운드 지속 작업
-	#schedule_init() 
+	schedule_init() 
 	application.register_blueprint(user.bp)
 	application.register_blueprint(board.bp)
 	application.register_blueprint(error.bp)
