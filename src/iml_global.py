@@ -46,6 +46,10 @@ def get_today():
 	now = datetime.datetime.now()
 	date = now.strftime("%Y-%m-%d")
 	return date
+def get_today_datetime():
+	now = datetime.datetime.now()
+	date = now.strftime("%Y%m%d%H%M%S")
+	return date
 
 def get_add_day(day):
 	now = datetime.datetime.now() + datetime.timedelta(days = day)

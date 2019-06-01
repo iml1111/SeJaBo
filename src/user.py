@@ -62,12 +62,17 @@ def add_post():
    if url is not None and url.startswith("http") is False: abort(400)
    img = request.files.get('img_url')
    if img is not None:
-      filename = str(current_user['student_id']) + "." + secure_filename(img.filename).split(".")[-1]
-      if not allowed_file(filename): abort(400)
+      filename = str(current_user['student_id']) +  get_today_datetime() + "." + secure_filename(img.filename).split(".")[-1]
+      print(filename)
+      if not allowed_file(filename):
+         print(111)
+         abort(400)
       img.save("." + UPLOAD_PATH + filename)
    else: 
       filename = None
-   if filename is not None and allowed_file(filename) is False: abort(400)
+   if filename is not None and allowed_file(filename) is False:
+      print(222)
+      abort(400)
    input_tuple = (
       current_user['student_id'],
       exp_date,
@@ -97,13 +102,11 @@ def modify_post():
    if current_user is None: abort(403)
    
    with g.db.cursor() as cursor:
-      sql = "SELECT * from post where author = %s LIMIT"
+      sql = "SELECT * from post where author = %s LIMIT 1"
       cursor.execute(sql, (current_user['student_id'],))
       result = cursor.fetchone()
    if result is None:
       abort(400)
-   print("sad")
-   print(request.form.get('title'))
    title = request.form['title']
    content = request.form['content']
    url = request.form.get('url')

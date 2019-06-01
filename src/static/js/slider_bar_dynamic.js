@@ -64,7 +64,7 @@ Date.prototype.format = function (f) {
         
         //element.value 가 스크롤변화에 따라 진짜 동적으로 값이 계속 변화됨.
         var d = new Date();
-        d.setDate(d.getDate()*1 + element.value*1);
+        d.setDate((d.getDate()+1)*1 + element.value*1);
   
         var today_ = d.format('yyyy-MM-dd (KS)');
         today_ajax = d.format('yyyy-MM-dd');

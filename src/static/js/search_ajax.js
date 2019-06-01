@@ -16,6 +16,7 @@ function search_enter() {
             if(json['result'] == "success")
             {
                 refleshElement(n, json['list']);
+                $('#location_now').text('검색결과');
             }
             else if(json['result'] == "bad request")
             {

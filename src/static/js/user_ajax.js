@@ -5,7 +5,7 @@ var user_POST; //사용자 게시글
 var user_LIKE_POSTS = []; //사용자 좋아요 게시글
 var user_DISLIKE_POSTS = []; //사용자 싫어요 게시글
 
-get_user_info();
+if(localStorage.getItem('sejabo_token') != null) get_user_info();
 
 function myinfo_user_page(json)
 {
@@ -20,18 +20,11 @@ function myinfo_user_page(json)
     $('#myinfo_button').css('display', 'block');
     $('#login_button').css('display', 'none');
 
-    //내정보 -> identication
-    var ua = navigator.userAgent;
-    if ((ua.indexOf("iPad") != -1) || (ua.indexOf("iPhone") != -1) || (ua.indexOf("iPod") != -1)) 
-    {
-        $('#myinfo_user_img').attr("src", "../static/img/SejaboLOGO.png");
-    }
-    else
-    {
-        var idf_user_hash = MD5(user_ID+"");
-        var idf_user_data = new Identicon(idf_user_hash, img_options).toString();
-        $('#myinfo_user_img').attr("src", "data:image/tiff;  base64," + idf_user_data);
-    }
+    //로그인 -> identification
+    var hash___ = MD5(user_ID + "");
+    var data___ = new Identicon(hash___, img_options).toString();
+    $('#myinfo_user_img').attr("src", "data:image/png;base64," + data___);
+
 
     //내정보 -> 이름 출력
     $('#myinfo_user_name').text(user_NAME);
@@ -51,6 +44,7 @@ function myinfo_user_page(json)
     }
     else
     {
+        $('#myinfo_user_post').attr('title', json['my_post']['post_id']);
         //작성한 글이 있으면 내 게시글 표시.
         document.getElementById("myinfo_user_post").style.display = "block";
         document.getElementById("myinfo_user_post_not").style.display = "none";
@@ -61,7 +55,12 @@ function myinfo_user_page(json)
         //내정보 -> 내 게시글 -> 내용 출력
         $('#myinfo_user_post_content').text(json['my_post']['content']);
 
+        $('#post_edit_title_real').val(user_POST['title']);
+        $('#post_edit_textarea').val(user_POST['content']);
+        $('#post_edit_URL').val(user_POST['url']);
+
     }
+
     
     //내정보 -> 좋아요 게시글 리스트 생성
     for(var i=0; i < json['like_posts'].length; i++)
@@ -145,6 +144,8 @@ function sejabo_login(){
             
             //마이 페이지 생성
             get_user_info();
+
+            snackbar('로그인 성공! >_<');
 
             //로그인 모달 닫기
             login_modal.style.display = "none";

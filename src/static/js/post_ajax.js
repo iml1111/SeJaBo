@@ -33,6 +33,12 @@ function post_submit(){
         }
     }
 
+    if(post_build.length == 0)
+    {
+        alert('게시 건물을 하나 이상 선택해주세요!');
+        return;
+    }
+
     formData.append('url', post_url);
     formData.append('build', post_build);
     formData.append('title', post_title);
@@ -63,7 +69,6 @@ function post_submit(){
         }
     })
 }
-
 //게시글 수정 =============================
 function post_edit() {
     var formData = new FormData();
@@ -72,9 +77,16 @@ function post_edit() {
     var post_edit_textarea = $('#post_edit_textarea').val();
     var post_edit_URL = $('#post_edit_URL').val();
     
+    if(post_edit_URL.length != 0 && post_edit_URL.slice(0, 4) != "http")
+    {
+      alert("http://를 포함해주세요.");
+      return;
+    }
+
     formData.append('title', post_edit_title_real);
     formData.append('content', post_edit_textarea);
     formData.append('url', post_edit_URL);
+
 
 
     if (post_edit_title_real.length < 100) {

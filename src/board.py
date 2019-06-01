@@ -2,6 +2,7 @@ from flask import *
 from werkzeug.security import *
 from flask_jwt_extended import *
 from iml_global import *
+import block_sort
 
 bp = Blueprint('board', __name__)
 
@@ -18,8 +19,8 @@ def get_post():
    )
 
 #게시물 불러오기: 입력값 존재 시 -> 특정 게시물 다 불러온다.
-@bp.route('/get_posts/<string:build>')
-def get_posts(build):
+@bp.route('/get_posts/<string:build>/<int:width>/<int:height>')
+def get_posts(build, width, height):
    if build not in ['yul','dae','hak','gwang']:
       abort(400)
    with g.db.cursor() as cursor:
@@ -28,8 +29,7 @@ def get_posts(build):
       sql = sql[0] + build + sql[1]
       cursor.execute(sql)
       result=cursor.fetchall()
-   if result is None:
-      abort(400)
+      #result = block_sort.main(result, width, height)
    return jsonify(
       list=result,
       result="success"
@@ -65,10 +65,10 @@ def like(post_id,interest):
       ##해당 게시물에 대해 호감 비호감이 등록되어 있는 경우, 호감,비호감의 전환이 있는경우
       ## 이미 호감이 등록되어있는 게시물에 똑같이 호감을 등록할 경우.
       ## 이미 비호감이 등록되어있는 게시물에 똑같이 비호감을 등록할 경우.
+         print(result, interest)
          if result['interest']==interest:
             sql = 'DELETE FROM like_dislike where post_id=%s and student_id =%s'
             cursor.execute(sql,(post_id, current_user['student_id']))
-            return jsonify(result="success")
          else:
             if result['interest']==0:
                sql="UPDATE like_dislike set interest=1 where student_id=%s and interest=0 and post_id=%s;"
@@ -104,8 +104,8 @@ def v(post_id):
    )
 
 def select_id(db, string):
-	with db.cursor() as cursor:
-		sql = "SELECT * FROM user WHERE student_id = %s LIMIT 1"
-		cursor.execute(sql,(string,))
-		result = cursor.fetchone()
-	return result
+   with db.cursor() as cursor:
+      sql = "SELECT * FROM user WHERE student_id = %s LIMIT 1"
+      cursor.execute(sql,(string,))
+      result = cursor.fetchone()
+   return result

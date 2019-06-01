@@ -1,56 +1,1097 @@
 /*=====================================================*/
 /*공통 모달 요소*/
 .none_display{
-    display: none;
-    opacity: 0;
-    transition: opacity 1s;
+  display: none;
+  opacity: 0;
+  transition: opacity 1s;
 }
 .show_display
 {
-    opacity: 1;
-    transition: opacity 1s;
+  opacity: 1;
+  transition: opacity 1s;
 }
 
 /*=====================================================*/
 /*메인 모달*/
 .sejong_logo{
-    width: 200px;
-    display: block;
-    margin: auto;
-    border-radius: 6px;
-    transition: 0.6s;
+  width: 200px;
+  display: block;
+  margin: auto;
+  border-radius: 6px;
+  transition: 0.6s;
 }
 .sejong_logo:hover {
-  transform: scale(1.1, 1.1);
-  box-shadow: 0 0 8px  #888888;
+transform: scale(1.1, 1.1);
+box-shadow: 0 0 8px  #888888;
 }
 
 .modal {
-    background-color: white;
-    overflow: hidden;
-    display: block; 
-    position: fixed;
-    z-index: 1000;
+  background-color: white;
+  overflow: hidden;
+  display: block; 
+  position: fixed;
+  z-index: 1000;
 }
 .main_modal-box
 {
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    border: 0px;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  border: 0px;
 }
 .modal_display_none{
-    display: none;
+  display: none;
 }
 
 /* ======================================================== */
 /* 로그인 모달 */
 .login_modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 900; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  border-radius: 6px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.login_modal_content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  height: 430px;
+  border-radius: 6px;
+}
+/* The Close Button */
+.login_modal_close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+}
+.login_modal_close:hover,
+.login_modal_close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* ======================================================== */
+/* 내정보 모달 */
+.myinfo_modal {
+  font-family: Raleway-Black;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 900; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  border-radius: 6px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.myinfo_modal_content {
+  background-color: #fefefe;
+  margin: auto;
+  border: 1px solid #888;
+  width: 1300px;
+  height: 900px;
+  border-radius: 6px;
+}
+/* The Close Button */
+.myinfo_modal_close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 10px;
+  margin-right: 10px;
+}
+.myinfo_modal_close:hover,
+.myinfo_modal_close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.myinfo_top {
+  position: absolute;
+  width: 400px;
+  height: 60px;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  margin: 20px;
+  padding: 9px 14px;
+  background-color: rgba(220,220,220,0.5);
+  border-radius: 8px;
+  cursor: default;
+  font-size: 30px;
+  color: #333333;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.4s;
+}
+.myinfo_top:hover {
+  transform: translate(-50%, 0) scale(1.06, 1.06);
+  box-shadow: 0 0 6px #bbbbbb;
+}
+/*myinfo_user 영역*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.myinfo_user {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 91%;
+  width: 30%;
+  padding: 30px 15px 30px 30px;
+}
+.myinfo_user_img {
+  display: block;
+  position: relative;
+  top: 0;
+  margin: auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  background-color: rgba(220,220,220,0.5);
+  cursor: default;
+  transition: 0.3s;
+}
+.myinfo_user_img:hover {
+  box-shadow: 0 0 6px #eeeeee;
+  transform: scale(1.06, 1.06);
+}
+.myinfo_user_name {
+  position: relative;
+  top: 15px;
+  margin: auto;
+  width: 240px;
+  height: auto;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  transition: 0.3s;
+  border-radius: 8px;
+  color: #333333;
+}
+.myinfo_user_number {
+  position: relative;
+  top: 50px;
+  width: 100%;
+  height: 50px;
+  float: left;
+  padding-bottom: 5px;
+  border-bottom: 4px solid #eeeeee;
+}
+.myinfo_user_number_title {
+  position: absolute;
+  left: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: default;
+  width: auto;
+  height: auto;
+  color: #333333;
+}
+.myinfo_user_number_number {
+  position: absolute;
+  right: 15px;
+  font-size: 25px;
+  width: auto;
+  height: auto;
+  color: #333333;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.myinfo_user_major {
+  position: relative;
+  top: 70px;
+  width: 100%;
+  height: 50px;
+  float: left;
+  padding-bottom: 5px;
+  border-bottom: 4px solid #eeeeee;
+}
+.myinfo_user_major_title {
+  position: absolute;
+  left: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: default;
+  width: auto;
+  height: auto;
+  color: #333333;
+}
+.myinfo_user_major_major {
+  position: absolute;
+  right: 15px;
+  font-size: 25px;
+  width: auto;
+  height: auto;
+  color: #333333;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/*내가 쓴글이 있는 box css*/
+.myinfo_user_post {
+  position: relative;
+  margin: auto;
+  padding: 8px;
+  top: 195px;
+  width: 330px;
+  height: 300px;
+  background-color: rgba(250,250,250,0.5);
+  box-shadow: 0 0 8px #bbbbbb;
+  border-radius: 15px;
+  transition: 0.4s;
+}
+.myinfo_user_post:hover {
+  transform: scale(1.06, 1.06);
+}
+.myinfo_user_post_title {
+  position: absolute;
+  width: 95%;
+  height: 50px;
+  font-size: 25px;
+  font-weight: bold;
+  border-bottom: 4px solid #eeeeee;
+  color: #333333;
+  padding-top: 5px;
+  background-color: rgba(250,250,250,0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.myinfo_user_post_content {
+  position: absolute;
+  width: 95%;
+  height: 179px;
+  top: 60px;
+  font-size: 18px;
+  font-weight: thin;
+  color: #666666;
+  padding-top: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-bottom: 4px solid #eeeeee;
+}
+.myinfo_user_post_fix {
+  position: absolute;
+  width: 46.5%;
+  height: 45px;
+  bottom: 8px;
+  left: 8px;
+  border-radius: 8px;
+  background-color: rgba(220,220,220,0.5);
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.myinfo_user_post_fix:hover {
+  background-color: rgba(120, 120, 120, 0.7);
+  color: white; 
+}
+.myinfo_user_post_delete {
+  position: absolute;
+  width: 46.5%;
+  height: 45px;
+  bottom: 8px;
+  right: 8px;
+  border-radius: 8px;
+  background-color: rgba(220,220,220,0.5);
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.myinfo_user_post_delete:hover {
+  background-color: rgba(120, 120, 120, 0.7);
+  color: white;
+}
+.myinfo_user_logout {
+  position: relative;
+  top: 230px;
+  margin: auto;
+  width: 90%;
+  height: 60px;
+  border-radius: 8px;
+  color: white;
+  font-size: 25px;
+  background-color: #E93333;
+  padding: 10px;
+  padding-top: 12px;
+  text-align: center;
+  box-shadow: 0 0 8px #777777;
+  cursor: pointer;
+  transition: 0.6s;
+}
+.myinfo_user_logout:hover {
+  background-color: #B60B0B;
+  box-shadow: 0 0 8px #fefefe;
+}
+/*내가 쓴글이 없는 box css*/
+.myinfo_user_post_not {
+  position: relative;
+  margin: auto;
+  padding: 8px;
+  top: 195px;
+  width: 330px;
+  height: 300px;
+  background-color: rgba(250,250,250,0.5);
+  box-shadow: 0 0 8px #bbbbbb;
+  border-radius: 15px;
+}
+.myinfo_user_post_not_img {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  font-size: 70px;
+  font-weight: bold;
+  color: #555555;
+  left: 50%;
+  top: 20%;
+  text-shadow: 0 0 6px #bbbbbb;
+  transform: translate(-50%, 0);
+  text-align: center;
+  cursor: default;
+}
+.myinfo_user_post_write {
+  position: absolute;
+  width: 240px;
+  height: 70px;
+  font-size: 30px;
+  padding-top: 13px;
+  font-weight: bold;
+  color: #333333;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, 0);
+  border-radius: 8px;
+  box-shadow: 0 0 8px #aaaaaa;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.6s;
+}
+.myinfo_user_post_write:hover {
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  background-color: rgba(120, 120, 120, 0.7);
+  color: white;
+}
+ /*myinfo_post 영역*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.myinfo_post {
+  position: absolute;
+  box-sizing: border-box;
+  right: 0;
+  bottom: 0;
+  height: 91%;
+  width: 70%;
+  padding: 30px 30px 30px 15px;
+}
+.myinfo_post_good_button {
+  position: absolute;
+  width: 35%;
+  height: 80px;
+  z-index: 950;
+  box-sizing: border-box;
+  top: 5%;
+  left: 10%;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: rgba(220,220,220,0.5);
+  text-align: center;
+  box-shadow: 0 0 8px #aaaaaa;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.myinfo_post_bad_button {
+  position: absolute;
+  width: 35%;
+  height: 80px;
+  z-index: 950;
+  box-sizing: border-box;
+  top: 5%;
+  right: 10%;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: rgba(220,220,220,0.5);
+  box-shadow: 0 0 8px #aaaaaa;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.myinfo_post_good_button:hover {
+  transform: translate(0, -10%);
+}
+.myinfo_post_bad_button:hover {
+  transform: translate(0, -10%);
+}
+.myinfo_post_button_click {
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  background-color: rgba(100,100,100,0.5);
+  color: white;
+  cursor: default;
+}
+.myinfo_post_bigbox {
+  position: absolute;
+  padding: 30px;
+  width: 92%;
+  height: 84%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -46%);
+  border-radius: 8px;
+  box-shadow: 0 0 8px #aaaaaa;
+  background-color: rgba(253,253,253,1);
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 1000;
+}
+/*myinfo 안에 div 동적 생성 css*/
+.myinfo_post_bigbox_content_good {
+  position: relative;
+  width: 750px;
+  height: 150px;
+  margin: auto;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px #aaaaaa;
+  background-color: rgba(245,245,245,1);
+  margin-bottom: 30px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.myinfo_post_bigbox_content_good:hover {
+  transform: scale(1.06, 1.06);
+  background-color: rgba(199, 255, 186, 0.5);
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+.myinfo_post_bigbox_content_bad {
+  position: relative;
+  width: 750px;
+  height: 150px;
+  margin: auto;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px #aaaaaa;
+  background-color: rgba(245,245,245,1);
+  margin-bottom: 30px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.myinfo_post_bigbox_content_bad:hover {
+  transform: scale(1.06, 1.06);
+  background-color: rgba(255, 219, 219,0.5);
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+.myinfo_post_bigbo_title {
+  position: relative;
+  width: 720px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #333333;
+  padding-bottom: 8px;
+  border-bottom: 4px solid #eaeaea;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.myinfo_post_bigbo_text {
+  position: relative;
+  width: 720px;
+  height: 70px;
+  padding-top: 10px;
+  font-size: 20px;
+  color: #444444;
+  overflow: hidden;
+}
+/* ======================================================== */
+/* 검색모달 */
+.search_modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 900; /* Sit on top */
+  padding-top: 200px; /* Location of the box */
+  left: 0;
+  top: 0;
+  border-radius: 6px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.search_modal_content {
+  background-color: #fefefe;
+  margin: auto;
+  border: 1px solid #888;
+  width: 80%;
+  height: 80px;
+  padding: 10px 15px;
+  border-radius: 6px;
+}
+.fa-search
+{
+  margin-top: 10px;
+  margin-left: 10px;
+  display: block;
+  font-size: 40px;
+  float: left;
+  color: grey;
+}
+/* The Close Button */
+.search_modal_close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+}
+.search_modal_close:hover,
+.search_modal_close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.search_modal_textbox
+{
+  border-top-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 1px !important;
+  display: block;
+  position: relative;
+  width: 90%;
+  height: 60px;
+  font-size: 20px;
+  margin:auto;
+  border-bottom-color: grey;
+}
+.search_modal_textbox:focus
+{
+  border-bottom-width: 2px !important;
+}
+ /* ======================================================== */
+/* 포스트모달 */
+.post_modal {
+  font-family: Raleway-Black;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 900; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.post_modal_content {
+  position: relative;
+  margin: auto;
+  border-radius: 8px;
+  transform: translate(-50%, -50%);
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 1300px;
+  height: 900px;
+}
+/* The Close Button */
+.post_modal_close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 10px;
+  margin-right: 10px;
+}
+.post_modal_close:hover,
+.post_modal_close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.share_button {
+  float: left;
+  margin: 30px;
+  padding: 10px 15px 10px 15px;
+  border-radius: 8px;
+}
+.post_top {
+  position: absolute;
+  width: 800px;
+  height: 60px;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  margin: 20px;
+  padding: 12px 15px;
+  background-color: rgba(220,220,220,0.5);
+  border-radius: 8px;
+  cursor: default;
+  transition: 0.4s;
+}
+.post_top:hover {
+  transform: translate(-50%, 0) scale(1.06, 1.06);
+  box-shadow: 0 0 6px #bbbbbb;
+}
+.post_data_start_title {
+  float: left;
+  font-size: 25px;
+  color: #333333;
+  margin-right: 10px;
+  font-weight: bold;
+  margin-left: 180px;
+}
+.post_data_start {
+  float: left;
+  font-size: 25px;
+  color: #333333;
+}
+.post_data_between {
+  float: left;
+  font-size: 25px;
+  color: #333333;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.post_data_end {
+  float: left;
+  font-size: 25px;
+  color: #333333;
+  margin-right: 10px;
+}
+.post_content_img {
+  position: absolute;
+  width: 50%;
+  height: 91%;
+  left: 0;
+  bottom: 0;
+  padding: 30px;
+  padding-right: 15px;
+}
+.post_content_img_image {
+  height: auto;
+  max-width: 80%;
+  height: 90%;
+  background-size: cover;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 8px;
+  box-shadow: 0 0 8px #666666;
+  cursor: pointer;
+  transition: 0.6s ease;
+}
+.post_content_img_content {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(220,220,220,0);
+  border-radius: 6px;
+}
+.post_content_text {
+  position: absolute;
+  width: 50%;
+  height: 91%;
+  right: 0;
+  bottom: 0;
+  padding: 30px;
+  padding-left: 15px;
+}
+.profile_img {
+  float: left;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  background-color: rgba(220,220,220,0.5);
+  cursor: pointer;
+  transition: 0.4s;
+}
+.profile_img:hover {
+  transform: scale(1.06, 1.06);
+  box-shadow: 0 0 6px #bbbbbb;
+}
+.profile_img:hover .profile_img_id{
+  transform: scale(1.06, 1.06);
+}
+/*idenfication 테스트용*/
+#profile_img_id
+{
+  width: 80px;
+  height: 80px;
+  transition: 0.4s;
+  border-radius: 8px;
+}
+
+.profile_title {
+  float: right; 
+  width: 500px;
+  height: 80px;
+  font-size: 40px;
+  color: #333333;
+  background-color: rgba(220,220,220,0.5);
+  border-radius: 8px;
+  padding: 15px 15px 10px 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap
+}
+.profile_hr {
+  margin-top: 30px;
+  float: left;
+  width: 100%;
+  border-top: 4px solid rgba(220,220,220, 0.3);
+  margin-bottom: 30px;
+}
+.post_content_content {
+  float: left;
+  width: 100%;
+  height: 380px;
+  background-color: rgba(220,220,220,0.5);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 20px;
+  color: #333333;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.post_content_url {
+  float: left;
+  margin-bottom: 25px;
+  width: 100%;
+  height: 60px;
+  border-radius: 8px;
+  color: #333333;
+  font-size: 25px;
+  background-color: rgba(220,220,220, 0.5);
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 0 8px #777777;
+  cursor: pointer;
+  transition: 0.6s;
+}
+.post_content_url:hover {
+  box-shadow: 0 0 8px #fefefe;
+  background-color: rgba(120, 120, 120, 0.7);
+  color: #333333;
+}
+.post_content_good {
+  position: absolute;
+  bottom: 60px;
+  width: 280px;
+  height: 60px;
+  border-radius: 8px;
+  border: 4px solid #A9F5A9;
+  color: #A9F5A9;
+  font-size: 25px;
+  padding: 10px;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(0,0,0,0);
+  cursor: pointer;
+  transition: 0.6s;
+}
+.post_content_bad {
+  position: absolute;
+  right: 30px;
+  bottom: 60px;
+  width: 280px;
+  height: 60px;
+  margin-left: 20px;
+  border-radius: 8px;
+  border: 4px solid #F6CED8;
+  color: #F6CED8;
+  font-size: 25px;
+  padding: 10px;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(0,0,0,0);
+  cursor: pointer;
+  transition: 0.6s;
+}/*
+.post_content_good:hover {
+  color: white;
+  background-color: #068E06;
+  box-shadow: 0 0 8px #fefefe;
+}
+.post_content_bad:hover {
+  color: white;
+  background-color: #FA5882;
+  box-shadow: 0 0 8px #fefefe;
+}*/
+/*board.js 에서 추가되 css 함수*/
+.post_content_good_nonclick {
+  color: #A9F5A9;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(0,0,0,0);
+}
+.post_content_good_click {
+  color: white;
+  background-color: #068E06;
+  box-shadow: 0 0 8px #fefefe;
+}
+.post_content_bad_nonclick {
+  color: #F6CED8;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(0,0,0,0);
+}
+.post_content_bad_click {
+  color: white;
+  background-color: #FA5882;
+  box-shadow: 0 0 8px #fefefe;
+}
+/* ======================================================== */
+/* 포스트 관리 모달 */
+.post_admin_modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 900; /* Sit on top */
+  padding-top: 150px; /* Location of the box */
+  left: 0;
+  top: 0;
+  border-radius: 6px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.post_admin_modal_content {
+  background-color: #fefefe;
+  margin: auto;
+  border: 1px solid #888;
+  width: 40%;
+  height: 720px;
+  padding: 10px 15px;
+  border-radius: 6px;
+}
+/* The Close Button */
+.post_admin_modal_close {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  color: #aaaaaa;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+}
+.post_admin_modal_close:hover,
+.post_admin_modal_close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.post_admin_top {
+  height: 40px;
+  float: left;
+  margin: 10px 0px;
+}
+.post_admin_title
+{
+  font-weight: bold;
+}
+.post_admin_prev_button {
+  position: absolute;
+  bottom: 15px;
+  right: 90px;
+  width: 60px;
+  height: auto;
+}
+.post_admin_next_button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 60px;
+  height: auto;
+}
+.post_admin_submit_button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 60px;
+  height: auto;
+}
+.post_admin_textarea
+{
+  width: 100%;
+  min-height: 400px;
+  resize: none;
+}
+.post_select_box_group
+{
+  position: relative;
+  width: 295px;
+  margin: auto;
+}
+.post_select_box
+{
+  margin: 0px 5px;
+  width: 60px;
+}
+.post_select_img_box
+{
+    width: 400px;
+    height: 450px;
+    margin: auto;
+}
+.post_select_box_img
+{
+  display: block;
+  width:340px;
+  height: 440px;
+  margin: auto;
+}
+/*
+피시버전 사진 규격
+S: 160 * 220
+M: 200 * 280
+L: 280 * 360
+XL: 340 * 440
+*/
+
+label {
+  display: block;
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+/* ======================================================== */
+/* 포스트 수정 모달 */
+.post_edit_modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 900; /* Sit on top */
+  padding-top: 150px; /* Location of the box */
+  left: 0;
+  top: 0;
+  border-radius: 6px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+.post_edit_modal_content {
+  background-color: #fefefe;
+  margin: auto;
+  border: 1px solid #888;
+  width: 40%;
+  height: 690px;
+  padding: 10px 15px;
+  border-radius: 6px;
+}
+/* The Close Button */
+.post_edit_modal_close {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  color: #aaaaaa;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+}
+.post_edit_modal_close:hover,
+.post_edit_modal_close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.post_edit_modal_top {
+  height: 40px;
+  float: left;
+  margin: 10px 0px;
+}
+.post_edit_title
+{
+  font-weight: bold;
+}
+.post_edit_textarea
+{
+  width: 100%;
+  min-height: 400px;
+  resize: none;
+}
+.post_edit_button {
+  display: block;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 100px;
+  height: auto;
+}
+
+@media screen and (max-width: 1000px) {
+  .login_modal_content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 95%;
+    height: 430px;
+    border-radius: 6px;
+  }
+  .search_modal_content {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 95%;
+    height: 80px;
+    padding: 10px 15px;
+    padding-top: 7px;
+    border-radius: 6px;
+  }
+  .search_modal_textbox
+  {
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 1px !important;
+    display: block;
+    position: relative;
+    width: 70%;
+    height: 60px;
+    font-size: 20px;
+    margin:auto;
+    border-bottom-color: grey;
+  }
+  .fa-search
+  {
+    margin-top: 18px;
+    margin-left: 5px;
+    display: block;
+    font-size: 25px;
+    float: left;
+    color: grey;
+  }
+  .post_admin_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 900; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 50px; /* Location of the box */
     left: 0;
     top: 0;
     border-radius: 6px;
@@ -60,37 +1101,336 @@
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
-  /* Modal Content */
-  .login_modal_content {
+  .post_admin_modal_content {
     background-color: #fefefe;
     margin: auto;
-    padding: 20px;
     border: 1px solid #888;
-    width: 50%;
-    height: 430px;
+    width: 95%;
+    height: 580px;
+    padding: 5px 15px;
     border-radius: 6px;
   }
+  .post_admin_textarea
+  {
+    width: 100%;
+    min-height: 280px;
+    resize: none;
+  }
+
+  .post_admin_title
+  {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .post_select_img_box
+  {
+      width: 100%;
+      height: 280px;
+      margin: auto;
+  }
+
+  .post_select_box_img
+  {
+    display: block;
+    width:200px;
+    height: 280px;
+    margin: auto;
+  }
+  .post_edit_modal_content {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 95%;
+    height: 550px;
+    padding: 10px 15px;
+    border-radius: 6px;
+  }
+  .post_edit_textarea
+  {
+    width: 100%;
+    min-height: 260px;
+    resize: none;
+  }
+  /* ======================================================== */
+  /* 포스트모달 = 모바일*/
+  .post_modal {
+    font-family: Raleway-Black;
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 900; /* Sit on top */
+    padding-top: 10px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  /* Modal Content */
+  .post_modal_content {
+    position: relative;
+    margin: auto;
+    border-radius: 8px;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    border: 1px solid #888;
+    width: 95%;
+    height: 90%;
+    margin-top: 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
   /* The Close Button */
-  .login_modal_close {
+  .post_modal_close {
     color: #aaaaaa;
     float: right;
     font-size: 40px;
     font-weight: bold;
+    padding: 0px;
+    margin-right: 15px;
   }
-  .login_modal_close:hover,
-  .login_modal_close:focus {
+  .post_modal_close:hover,
+  .post_modal_close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
   }
+  .share_button {
+    float: left;
+    margin: 15px 10px 10px 10px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px;
+  }
+  .post_top {
+    position: absolute;
+    width: 73%;
+    height: 40px;
+    left: 50%;
+    top: 0;
+    transform: translate(-53%, 0);
+    margin: 15px;
+    padding: 8px 0px 0px 0px;
+    background-color: rgba(220,220,220,0.5);
+    border-radius: 8px;
+    cursor: default;
+    transition: 0.4s;
+  }
+  .post_top:hover {
+    transform: translate(-53%, 0) scale(1.06, 1.06);
+    box-shadow: 0 0 6px #bbbbbb;
+  }
+  .post_data_start {
+    float: left;
+    font-size: 15px;
+    color: #333333;
+    margin-left: 60px;
+  }
+  .post_data_between {
+    float: left;
+    font-size: 15px;
+    color: #333333;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .post_data_end {
+    float: left;
+    font-size: 15px;
+    color: #333333;
+    margin-right: 10px;
+  }
+  .post_content_img {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 80%;
+    left: 0;
+    top: 0px;
+    bottom: 0;
+    padding: 10px;
+    padding-right: 10px;
+  }
+  .post_content_img_image {
+    height: auto;
+    max-width: 100%;
+    height: 90%;
+    background-size: cover;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 8px;
+    box-shadow: 0 0 4px #666666;
+    cursor: pointer;
+    transition: 0.6s ease;
+  }
+  .post_content_img_content {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(220,220,220,0);
+    border-radius: 6px;
+  }
+  .post_content_text {
+    position: relative;
+    float: left;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    padding-left: 10px;
+  }
+  .profile_img {
+    float: left;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background-color: rgba(220,220,220,0.5);
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  .profile_img:hover {
+    transform: scale(1.06, 1.06);
+    box-shadow: 0 0 6px #bbbbbb;
+  }
+  .profile_img:hover .profile_img_id{
+    transform: scale(1.06, 1.06);
+  }
+  /*idenfication 테스트용*/
+  #profile_img_id
+  {
+    width: 50px;
+    height: 50px;
+    transition: 0.4s;
+    border-radius: 8px;
+  }
+  
+  .profile_title {
+    float: left; 
+    width: 80%;
+    height: 50px;
+    font-size: 20px;
+    color: #333333;
+    background-color: rgba(220,220,220,0.5);
+    border-radius: 8px;
+    padding: 10px 5px 5px 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 10px;
+  }
+  .profile_hr {
+    margin-top: 10px;
+    float: left;
+    width: 100%;
+    border-top: 3px solid rgba(220,220,220, 0.3);
+    margin-bottom: 10px;
+  }
+  .post_content_content {
+    float: left;
+    width: 100%;
+    height: 300px;
+    background-color: rgba(220,220,220,0.5);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 15px;
+    color: #333333;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .post_content_url {
+    float: left;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    color: #333333;
+    font-size: 20px;
+    background-color: rgba(220,220,220, 0.5);
+    padding: 5px;
+    text-align: center;
+    box-shadow: 0 0 8px #777777;
+    cursor: pointer;
+    transition: 0.6s;
+  }
+  .post_content_url:hover {
+    box-shadow: 0 0 8px #fefefe;
+    background-color: rgba(120, 120, 120, 0.7);
+    color: #333333;
+  }
+
+  .post_content_good {
+  border: 2px solid #A9F5A9;
+  color: #A9F5A9;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(0,0,0,0);
+  position: relative;
+  float: left;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 40%;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 20px;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.6s;
+  margin-left: 10px;
+}
+.post_content_bad {
+  border: 2px solid #F6CED8;
+  color: #F6CED8;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(0,0,0,0);
+  position: relative;
+  float: right;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 40%;
+  height: 40px;
+  margin-left: 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.6s;
+  margin-right: 10px;
+}
+.post_content_good_nonclick {
+  color: #A9F5A9;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(0,0,0,0);
+}
+.post_content_good_click {
+  color: white;
+  background-color: #068E06;
+  box-shadow: 0 0 8px #fefefe;
+}
+.post_content_bad_nonclick {
+  color: #F6CED8;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px rgba(0,0,0,0);
+}
+.post_content_bad_click {
+  color: white;
+  background-color: #FA5882;
+  box-shadow: 0 0 8px #fefefe;
+}
   /* ======================================================== */
-  /* 내정보 모달 */
+  /* 내정보 모달  = 모바일*/
   .myinfo_modal {
     font-family: Raleway-Black;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 900; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 10px; /* Location of the box */
     left: 0;
     top: 0;
     border-radius: 6px;
@@ -105,9 +1445,12 @@
     background-color: #fefefe;
     margin: auto;
     border: 1px solid #888;
-    width: 1300px;
-    height: 900px;
+    width: 95%;
+    height: 90%;
+    margin-top: 30px;
     border-radius: 6px;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   /* The Close Button */
   .myinfo_modal_close {
@@ -115,8 +1458,8 @@
     float: right;
     font-size: 40px;
     font-weight: bold;
-    padding: 10px;
-    margin-right: 10px;
+    padding: 0px;
+    margin-right: 15px;
   }
   .myinfo_modal_close:hover,
   .myinfo_modal_close:focus {
@@ -126,43 +1469,44 @@
   }
   .myinfo_top {
     position: absolute;
-    width: 400px;
-    height: 60px;
+    width: 60%;
+    height: 40px;
     left: 50%;
-    top: 0;
-    transform: translate(-50%, 0);
-    margin: 20px;
-    padding: 9px 14px;
+    top: 0px;
+    transform: translate(-56%, 0);
+    margin: 15px;
+    padding: 7px 0px;
     background-color: rgba(220,220,220,0.5);
     border-radius: 8px;
     cursor: default;
-    font-size: 30px;
+    font-size: 20px;
     color: #333333;
     font-weight: bold;
     text-align: center;
     transition: 0.4s;
   }
   .myinfo_top:hover {
-    transform: translate(-50%, 0) scale(1.06, 1.06);
+    transform: translate(-56%, 0) scale(1.06, 1.06);
     box-shadow: 0 0 6px #bbbbbb;
   }
   /*myinfo_user 영역*/
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   .myinfo_user {
-    position: absolute;
+    position: relative;
     left: 0;
+    top: 70px;
     bottom: 0;
-    height: 91%;
-    width: 30%;
-    padding: 30px 15px 30px 30px;
+    height: 135%;
+    width: 100%;
+    padding: 10px 10px 10px 10px;
   }
   .myinfo_user_img {
-    display: block;
     position: relative;
     top: 0;
+    left: 3%;
     margin: auto;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 8px;
     background-color: rgba(220,220,220,0.5);
     cursor: default;
@@ -174,12 +1518,13 @@
   }
   .myinfo_user_name {
     position: relative;
-    top: 15px;
+    float: left;
+    top: 10px;
     margin: auto;
-    width: 240px;
+    width: 100%;
     height: auto;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     transition: 0.3s;
     border-radius: 8px;
@@ -187,17 +1532,17 @@
   }
   .myinfo_user_number {
     position: relative;
-    top: 50px;
-    width: 100%;
-    height: 50px;
     float: left;
-    padding-bottom: 5px;
-    border-bottom: 4px solid #eeeeee;
+    top: 20px;
+    width: 100%;
+    height: 30px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid #eeeeee;
   }
   .myinfo_user_number_title {
     position: absolute;
-    left: 15px;
-    font-size: 25px;
+    left: 10px;
+    font-size: 20px;
     font-weight: bold;
     cursor: default;
     width: auto;
@@ -206,8 +1551,8 @@
   }
   .myinfo_user_number_number {
     position: absolute;
-    right: 15px;
-    font-size: 25px;
+    right: 10px;
+    font-size: 20px;
     width: auto;
     height: auto;
     color: #333333;
@@ -217,17 +1562,17 @@
   }
   .myinfo_user_major {
     position: relative;
-    top: 70px;
-    width: 100%;
-    height: 50px;
     float: left;
-    padding-bottom: 5px;
-    border-bottom: 4px solid #eeeeee;
+    top: 40px;
+    width: 100%;
+    height: 30px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid #eeeeee;
   }
   .myinfo_user_major_title {
     position: absolute;
-    left: 15px;
-    font-size: 25px;
+    left: 10px;
+    font-size: 20px;
     font-weight: bold;
     cursor: default;
     width: auto;
@@ -236,8 +1581,8 @@
   }
   .myinfo_user_major_major {
     position: absolute;
-    right: 15px;
-    font-size: 25px;
+    right: 10px;
+    font-size: 20px;
     width: auto;
     height: auto;
     color: #333333;
@@ -249,23 +1594,27 @@
   .myinfo_user_post {
     position: relative;
     margin: auto;
-    padding: 8px;
-    top: 195px;
-    width: 330px;
+    padding: 5px;
+    width: 90%;
     height: 300px;
+    top: 170px;
     background-color: rgba(250,250,250,0.5);
     box-shadow: 0 0 8px #bbbbbb;
     border-radius: 15px;
+    transition: 0.4s;
+  }
+  .myinfo_user_post:hover {
+    transform: scale(1.06, 1.06);
   }
   .myinfo_user_post_title {
     position: absolute;
     width: 95%;
     height: 50px;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
-    border-bottom: 4px solid #eeeeee;
+    border-bottom: 3px solid #eeeeee;
     color: #333333;
-    padding-top: 5px;
+    padding-top: 7px;
     background-color: rgba(250,250,250,0.5);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -322,13 +1671,13 @@
   }
   .myinfo_user_logout {
     position: relative;
-    top: 230px;
+    top: 210px;
     margin: auto;
     width: 90%;
-    height: 60px;
+    height: 50px;
     border-radius: 8px;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     background-color: #E93333;
     padding: 10px;
     padding-top: 12px;
@@ -345,10 +1694,10 @@
   .myinfo_user_post_not {
     position: relative;
     margin: auto;
-    padding: 8px;
-    top: 195px;
-    width: 330px;
+    padding: 5px;
+    width: 90%;
     height: 300px;
+    top: 170px;
     background-color: rgba(250,250,250,0.5);
     box-shadow: 0 0 8px #bbbbbb;
     border-radius: 15px;
@@ -392,13 +1741,15 @@
    /*myinfo_post 영역*/
   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
   .myinfo_post {
-    position: absolute;
+    position: relative;
     box-sizing: border-box;
     right: 0;
+    top: 0;
+    left: 0;
     bottom: 0;
-    height: 91%;
-    width: 70%;
-    padding: 30px 30px 30px 15px;
+    height: 90%;
+    width: 100%;
+    padding: 10px 10px 10px 10px;
   }
   .myinfo_post_good_button {
     position: absolute;
@@ -413,7 +1764,7 @@
     background-color: rgba(220,220,220,0.5);
     text-align: center;
     box-shadow: 0 0 8px #aaaaaa;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.4s;
@@ -431,7 +1782,7 @@
     background-color: rgba(220,220,220,0.5);
     box-shadow: 0 0 8px #aaaaaa;
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.4s;
@@ -450,9 +1801,9 @@
   }
   .myinfo_post_bigbox {
     position: absolute;
-    padding: 30px;
+    padding: 10px;
     width: 92%;
-    height: 84%;
+    height: 80%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -46%);
@@ -466,14 +1817,14 @@
   /*myinfo 안에 div 동적 생성 css*/
   .myinfo_post_bigbox_content_good {
     position: relative;
-    width: 750px;
-    height: 150px;
+    width: 98%;
+    height: 95px;
     margin: auto;
-    padding: 15px;
+    padding: 5px;
     border-radius: 8px;
     box-shadow: 0 0 6px #aaaaaa;
     background-color: rgba(245,245,245,1);
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     transition: 0.4s;
     cursor: pointer;
   }
@@ -484,14 +1835,14 @@
   }
   .myinfo_post_bigbox_content_bad {
     position: relative;
-    width: 750px;
-    height: 150px;
+    width: 98%;
+    height: 95px;
     margin: auto;
-    padding: 15px;
+    padding: 5px;
     border-radius: 8px;
     box-shadow: 0 0 6px #aaaaaa;
     background-color: rgba(245,245,245,1);
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     transition: 0.4s;
     cursor: pointer;
   }
@@ -502,1323 +1853,23 @@
   }
   .myinfo_post_bigbo_title {
     position: relative;
-    width: 720px;
-    font-size: 25px;
-    font-weight: bold;
+    width: 95%;
+    height: 35px;
+    font-size: 18px;
     color: #333333;
-    padding-bottom: 8px;
-    border-bottom: 4px solid #eaeaea;
+    padding-bottom: 5px;
+    border-bottom: 3px solid #eaeaea;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
   .myinfo_post_bigbo_text {
     position: relative;
-    width: 720px;
-    height: 70px;
-    padding-top: 10px;
-    font-size: 20px;
+    width: 95%;
+    height: 50px;
+    padding-top: 5px;
+    font-size: 15px;
     color: #444444;
     overflow: hidden;
   }
-  /* ======================================================== */
-  /* 검색모달 */
-  .search_modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 900; /* Sit on top */
-    padding-top: 200px; /* Location of the box */
-    left: 0;
-    top: 0;
-    border-radius: 6px;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  /* Modal Content */
-  .search_modal_content {
-    background-color: #fefefe;
-    margin: auto;
-    border: 1px solid #888;
-    width: 80%;
-    height: 80px;
-    padding: 10px 15px;
-    border-radius: 6px;
-  }
-  .fa-search
-  {
-    margin-top: 10px;
-    margin-left: 10px;
-    display: block;
-    font-size: 40px;
-    float: left;
-    color: grey;
-  }
-  /* The Close Button */
-  .search_modal_close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 40px;
-    font-weight: bold;
-  }
-  .search_modal_close:hover,
-  .search_modal_close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .search_modal_textbox
-  {
-    border-top-width: 0px;
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border-bottom-width: 1px !important;
-    display: block;
-    position: relative;
-    width: 90%;
-    height: 60px;
-    font-size: 20px;
-    margin:auto;
-    border-bottom-color: grey;
-  }
-  .search_modal_textbox:focus
-  {
-    border-bottom-width: 2px !important;
-  }
-   /* ======================================================== */
-  /* 포스트모달 */
-  .post_modal {
-    font-family: Raleway-Black;
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 900; /* Sit on top */
-    padding-top: 100; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  /* Modal Content */
-  .post_modal_content {
-    position: relative;
-    margin: auto;
-    border-radius: 8px;
-    transform: translate(-50%, -50%);
-    background-color: #fefefe;
-    border: 1px solid #888;
-    width: 1300px;
-    height: 900px;
-  }
-  /* The Close Button */
-  .post_modal_close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 40px;
-    font-weight: bold;
-    padding: 10px;
-    margin-right: 10px;
-  }
-  .post_modal_close:hover,
-  .post_modal_close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .share_button {
-    float: left;
-    margin: 30px;
-    padding: 10px 15px 10px 15px;
-    border-radius: 8px;
-  }
-  .post_top {
-    position: absolute;
-    width: 800px;
-    height: 60px;
-    left: 50%;
-    top: 0;
-    transform: translate(-50%, 0);
-    margin: 20px;
-    padding: 12px 15px;
-    background-color: rgba(220,220,220,0.5);
-    border-radius: 8px;
-    cursor: default;
-    transition: 0.4s;
-  }
-  .post_top:hover {
-    transform: translate(-50%, 0) scale(1.06, 1.06);
-    box-shadow: 0 0 6px #bbbbbb;
-  }
-  .post_data_start_title {
-    float: left;
-    font-size: 25px;
-    color: #333333;
-    margin-right: 10px;
-    font-weight: bold;
-    margin-left: 180px;
-  }
-  .post_data_start {
-    float: left;
-    font-size: 25px;
-    color: #333333;
-  }
-  .post_data_between {
-    float: left;
-    font-size: 25px;
-    color: #333333;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-  .post_data_end {
-    float: left;
-    font-size: 25px;
-    color: #333333;
-    margin-right: 10px;
-  }
-  .post_content_img {
-    position: absolute;
-    width: 50%;
-    height: 91%;
-    left: 0;
-    bottom: 0;
-    padding: 30px;
-    padding-right: 15px;
-  }
-  .post_content_img_image {
-    height: auto;
-    max-width: 80%;
-    background-size: cover;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    border-radius: 8px;
-    box-shadow: 0 0 8px #666666;
-    cursor: pointer;
-    transition: 0.6s ease;
-  }
-  .post_content_img_content {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(220,220,220,0);
-    border-radius: 6px;
-  }
-  .post_content_text {
-    position: absolute;
-    width: 50%;
-    height: 91%;
-    right: 0;
-    bottom: 0;
-    padding: 30px;
-    padding-left: 15px;
-  }
-  .profile_img {
-    float: left;
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    background-color: rgba(220,220,220,0.5);
-    cursor: pointer;
-    transition: 0.4s;
-  }
-  .profile_img:hover {
-    transform: scale(1.06, 1.06);
-    box-shadow: 0 0 6px #bbbbbb;
-  }
-  .profile_img:hover .profile_img_id{
-    transform: scale(1.06, 1.06);
-  }
-  /*idenfication 테스트용*/
-  #profile_img_id
-  {
-    width: 80px;
-    height: 80px;
-    transition: 0.4s;
-  }
-  
-  .profile_title {
-    float: right; 
-    width: 500px;
-    height: 80px;
-    font-size: 40px;
-    color: #333333;
-    background-color: rgba(220,220,220,0.5);
-    border-radius: 8px;
-    padding: 15px 15px 10px 15px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap
-  }
-  .profile_hr {
-    margin-top: 30px;
-    float: left;
-    width: 100%;
-    border-top: 4px solid rgba(220,220,220, 0.3);
-    margin-bottom: 30px;
-  }
-  .post_content_content {
-    float: left;
-    width: 100%;
-    height: 380px;
-    background-color: rgba(220,220,220,0.5);
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 20px;
-    color: #333333;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  .post_content_url {
-    float: left;
-    margin-bottom: 25px;
-    width: 100%;
-    height: 60px;
-    border-radius: 8px;
-    color: #333333;
-    font-size: 25px;
-    background-color: rgba(220,220,220, 0.5);
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 0 8px #777777;
-    cursor: pointer;
-    transition: 0.6s;
-  }
-  .post_content_url:hover {
-    box-shadow: 0 0 8px #fefefe;
-    background-color: rgba(120, 120, 120, 0.7);
-    color: #333333;
-  }
-  .post_content_good {
-    position: absolute;
-    left: 20px;
-    bottom: 60px;
-    width: 280px;
-    height: 60px;
-    border-radius: 8px;
-    color: white;
-    font-size: 25px;
-    padding: 10px;
-    text-align: center;
-    background-color: #30A92C;
-    box-shadow: 0 0 8px #777777;
-    cursor: pointer;
-    transition: 0.6s;
-  }
-  .post_content_bad {
-    position: absolute;
-    right: 30px;
-    bottom: 60px;
-    width: 280px;
-    height: 60px;
-    margin-left: 20px;
-    border-radius: 8px;
-    color: white;
-    font-size: 25px;
-    padding: 10px;
-    text-align: center;
-    background-color: #E93333;
-    box-shadow: 0 0 8px #777777;
-    cursor: pointer;
-    transition: 0.6s;
-  }
-  .post_content_good:hover {
-    background-color: #068E06;
-    box-shadow: 0 0 8px #fefefe;
-  }
-  .post_content_bad:hover {
-    background-color: #B60B0B;
-    box-shadow: 0 0 8px #fefefe;
-  }
-  
-  /* ======================================================== */
-  /* 포스트 관리 모달 */
-  .post_admin_modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 900; /* Sit on top */
-    padding-top: 150px; /* Location of the box */
-    left: 0;
-    top: 0;
-    border-radius: 6px;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  /* Modal Content */
-  .post_admin_modal_content {
-    background-color: #fefefe;
-    margin: auto;
-    border: 1px solid #888;
-    width: 40%;
-    height: 720px;
-    padding: 10px 15px;
-    border-radius: 6px;
-  }
-  /* The Close Button */
-  .post_admin_modal_close {
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    color: #aaaaaa;
-    float: right;
-    font-size: 40px;
-    font-weight: bold;
-  }
-  .post_admin_modal_close:hover,
-  .post_admin_modal_close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .post_admin_top {
-    height: 40px;
-    float: left;
-    margin: 10px 0px;
-  }
-  .post_admin_title
-  {
-    font-weight: bold;
-  }
-  .post_admin_prev_button {
-    position: absolute;
-    bottom: 15px;
-    right: 90px;
-    width: 60px;
-    height: auto;
-  }
-  .post_admin_next_button {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    width: 60px;
-    height: auto;
-  }
-  .post_admin_submit_button {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    width: 60px;
-    height: auto;
-  }
-  .post_admin_textarea
-  {
-    width: 100%;
-    min-height: 400px;
-    resize: none;
-  }
-  .post_select_box_group
-  {
-    position: relative;
-    width: 295px;
-    margin: auto;
-  }
-  .post_select_box
-  {
-    margin: 0px 5px;
-    width: 60px;
-  }
-  .post_select_img_box
-  {
-      width: 400px;
-      height: 450px;
-      margin: auto;
-  }
-  .post_select_box_img
-  {
-    display: block;
-    width:340px;
-    height: 440px;
-    margin: auto;
-  }
-  /*
-  피시버전 사진 규격
-  S: 160 * 220
-  M: 200 * 280
-  L: 280 * 360
-  XL: 340 * 440
-  */
-
-  label {
-    display: block;
-    font: 1rem 'Fira Sans', sans-serif;
 }
-
- /* ======================================================== */
-  /* 포스트 수정 모달 */
-  .post_edit_modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 900; /* Sit on top */
-    padding-top: 150px; /* Location of the box */
-    left: 0;
-    top: 0;
-    border-radius: 6px;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
-  /* Modal Content */
-  .post_edit_modal_content {
-    background-color: #fefefe;
-    margin: auto;
-    border: 1px solid #888;
-    width: 40%;
-    height: 690px;
-    padding: 10px 15px;
-    border-radius: 6px;
-  }
-  /* The Close Button */
-  .post_edit_modal_close {
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    color: #aaaaaa;
-    float: right;
-    font-size: 40px;
-    font-weight: bold;
-  }
-  .post_edit_modal_close:hover,
-  .post_edit_modal_close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .post_edit_modal_top {
-    height: 40px;
-    float: left;
-    margin: 10px 0px;
-  }
-  .post_edit_title
-  {
-    font-weight: bold;
-  }
-  .post_edit_textarea
-  {
-    width: 100%;
-    min-height: 400px;
-    resize: none;
-  }
-  .post_edit_button {
-    display: block;
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    width: 100px;
-    height: auto;
-  }
-
-  @media screen and (max-width: 1000px) {
-    .login_modal_content {
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 95%;
-      height: 430px;
-      border-radius: 6px;
-    }
-    .search_modal_content {
-      background-color: #fefefe;
-      margin: auto;
-      border: 1px solid #888;
-      width: 95%;
-      height: 80px;
-      padding: 10px 15px;
-      padding-top: 7px;
-      border-radius: 6px;
-    }
-    .search_modal_textbox
-    {
-      border-top-width: 0px;
-      border-left-width: 0px;
-      border-right-width: 0px;
-      border-bottom-width: 1px !important;
-      display: block;
-      position: relative;
-      width: 70%;
-      height: 60px;
-      font-size: 20px;
-      margin:auto;
-      border-bottom-color: grey;
-    }
-    .fa-search
-    {
-      margin-top: 18px;
-      margin-left: 5px;
-      display: block;
-      font-size: 25px;
-      float: left;
-      color: grey;
-    }
-    .post_admin_modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 900; /* Sit on top */
-      padding-top: 50px; /* Location of the box */
-      left: 0;
-      top: 0;
-      border-radius: 6px;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
-    .post_admin_modal_content {
-      background-color: #fefefe;
-      margin: auto;
-      border: 1px solid #888;
-      width: 95%;
-      height: 580px;
-      padding: 5px 15px;
-      border-radius: 6px;
-    }
-    .post_admin_textarea
-    {
-      width: 100%;
-      min-height: 280px;
-      resize: none;
-    }
-  
-    .post_admin_title
-    {
-      font-weight: bold;
-      font-size: 20px;
-    }
-  
-    .post_select_img_box
-    {
-        width: 100%;
-        height: 280px;
-        margin: auto;
-    }
-  
-    .post_select_box_img
-    {
-      display: block;
-      width:200px;
-      height: 280px;
-      margin: auto;
-    }
-    .post_edit_modal_content {
-      background-color: #fefefe;
-      margin: auto;
-      border: 1px solid #888;
-      width: 95%;
-      height: 550px;
-      padding: 10px 15px;
-      border-radius: 6px;
-    }
-    .post_edit_textarea
-    {
-      width: 100%;
-      min-height: 260px;
-      resize: none;
-    }
-    /* ======================================================== */
-    /* 포스트모달 = 모바일*/
-    .post_modal {
-      font-family: Raleway-Black;
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 900; /* Sit on top */
-      padding-top: 10px; /* Location of the box */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
-    /* Modal Content */
-    .post_modal_content {
-      position: relative;
-      margin: auto;
-      border-radius: 8px;
-      transform: translate(-50%, -50%);
-      background-color: #fefefe;
-      border: 1px solid #888;
-      width: 95%;
-      height: 90%;
-      margin-top: 30px;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-    /* The Close Button */
-    .post_modal_close {
-      color: #aaaaaa;
-      float: right;
-      font-size: 40px;
-      font-weight: bold;
-      padding: 0px;
-      margin-right: 15px;
-    }
-    .post_modal_close:hover,
-    .post_modal_close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .share_button {
-      float: left;
-      margin: 15px 10px 10px 10px;
-      padding: 5px 10px 5px 10px;
-      border-radius: 8px;
-    }
-    .post_top {
-      position: absolute;
-      width: 73%;
-      height: 40px;
-      left: 50%;
-      top: 0;
-      transform: translate(-53%, 0);
-      margin: 15px;
-      padding: 8px 0px 0px 0px;
-      background-color: rgba(220,220,220,0.5);
-      border-radius: 8px;
-      cursor: default;
-      transition: 0.4s;
-    }
-    .post_top:hover {
-      transform: translate(-50%, 0) scale(1.06, 1.06);
-      box-shadow: 0 0 6px #bbbbbb;
-    }
-    .post_data_start {
-      float: left;
-      font-size: 15px;
-      color: #333333;
-      margin-left: 45px;
-    }
-    .post_data_between {
-      float: left;
-      font-size: 15px;
-      color: #333333;
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-    .post_data_end {
-      float: left;
-      font-size: 15px;
-      color: #333333;
-      margin-right: 10px;
-    }
-    .post_content_img {
-      position: relative;
-      float: left;
-      width: 100%;
-      height: 80%;
-      left: 0;
-      top: 0px;
-      bottom: 0;
-      padding: 10px;
-      padding-right: 10px;
-    }
-    .post_content_img_image {
-      height: auto;
-      max-width: 600px;
-      background-size: cover;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-50%);
-      border-radius: 8px;
-      box-shadow: 0 0 8px #666666;
-      cursor: pointer;
-      transition: 0.6s ease;
-    }
-    .post_content_img_content {
-      width: 100%;
-      height: 100%;
-      background-color: rgba(220,220,220,0);
-      border-radius: 6px;
-    }
-    .post_content_text {
-      position: relative;
-      float: left;
-      width: 100%;
-      height: auto;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 10px;
-      padding-left: 10px;
-    }
-    .profile_img {
-      float: left;
-      width: 50px;
-      height: 50px;
-      border-radius: 8px;
-      background-color: rgba(220,220,220,0.5);
-      cursor: pointer;
-      transition: 0.4s;
-    }
-    .profile_img:hover {
-      transform: scale(1.06, 1.06);
-      box-shadow: 0 0 6px #bbbbbb;
-    }
-    .profile_img:hover .profile_img_id{
-      transform: scale(1.06, 1.06);
-    }
-    /*idenfication 테스트용*/
-    #profile_img_id
-    {
-      width: 50px;
-      height: 50px;
-      transition: 0.4s;
-    }
-    
-    .profile_title {
-      float: left; 
-      width: 80%;
-      height: 50px;
-      font-size: 20px;
-      color: #333333;
-      background-color: rgba(220,220,220,0.5);
-      border-radius: 8px;
-      padding: 10px 5px 5px 5px;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      margin-left: 10px;
-    }
-    .profile_hr {
-      margin-top: 10px;
-      float: left;
-      width: 100%;
-      border-top: 3px solid rgba(220,220,220, 0.3);
-      margin-bottom: 10px;
-    }
-    .post_content_content {
-      float: left;
-      width: 100%;
-      height: 300px;
-      background-color: rgba(220,220,220,0.5);
-      border-radius: 8px;
-      padding: 10px;
-      font-size: 15px;
-      color: #333333;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-    .post_content_url {
-      float: left;
-      margin-bottom: 15px;
-      width: 100%;
-      height: 40px;
-      border-radius: 8px;
-      color: #333333;
-      font-size: 20px;
-      background-color: rgba(220,220,220, 0.5);
-      padding: 5px;
-      text-align: center;
-      box-shadow: 0 0 8px #777777;
-      cursor: pointer;
-      transition: 0.6s;
-    }
-    .post_content_url:hover {
-      box-shadow: 0 0 8px #fefefe;
-      background-color: rgba(120, 120, 120, 0.7);
-      color: #333333;
-    }
-    .post_content_good {
-      position: relative;
-      float: left;
-      left: 0px;
-      top: 0px;
-      bottom: 0px;
-      width: 40%;
-      height: 40px;
-      border-radius: 8px;
-      color: white;
-      font-size: 20px;
-      padding: 5px;
-      text-align: center;
-      background-color: #30A92C;
-      box-shadow: 0 0 8px #777777;
-      cursor: pointer;
-      transition: 0.6s;
-      margin-left: 10px;
-    }
-    .post_content_bad {
-      position: relative;
-      float: right;
-      right: 0px;
-      top: 0px;
-      bottom: 0px;
-      width: 40%;
-      height: 40px;
-      margin-left: 20px;
-      border-radius: 8px;
-      color: white;
-      font-size: 20px;
-      padding: 5px;
-      text-align: center;
-      background-color: #E93333;
-      box-shadow: 0 0 8px #777777;
-      cursor: pointer;
-      transition: 0.6s;
-      margin-right: 10px;
-    }
-    .post_content_good:hover {
-      background-color: #068E06;
-      box-shadow: 0 0 8px #fefefe;
-    }
-    .post_content_bad:hover {
-      background-color: #B60B0B;
-      box-shadow: 0 0 8px #fefefe;
-    }
-    /* ======================================================== */
-    /* 내정보 모달  = 모바일*/
-    .myinfo_modal {
-      font-family: Raleway-Black;
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 900; /* Sit on top */
-      padding-top: 10px; /* Location of the box */
-      left: 0;
-      top: 0;
-      border-radius: 6px;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
-    /* Modal Content */
-    .myinfo_modal_content {
-      background-color: #fefefe;
-      margin: auto;
-      border: 1px solid #888;
-      width: 95%;
-      height: 90%;
-      margin-top: 30px;
-      border-radius: 6px;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-    /* The Close Button */
-    .myinfo_modal_close {
-      color: #aaaaaa;
-      float: right;
-      font-size: 40px;
-      font-weight: bold;
-      padding: 0px;
-      margin-right: 15px;
-    }
-    .myinfo_modal_close:hover,
-    .myinfo_modal_close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .myinfo_top {
-      position: absolute;
-      width: 60%;
-      height: 40px;
-      left: 50%;
-      top: 0px;
-      transform: translate(-56%, 0);
-      margin: 15px;
-      padding: 7px 0px;
-      background-color: rgba(220,220,220,0.5);
-      border-radius: 8px;
-      cursor: default;
-      font-size: 20px;
-      color: #333333;
-      font-weight: bold;
-      text-align: center;
-      transition: 0.4s;
-    }
-    .myinfo_top:hover {
-      transform: translate(-50%, 0) scale(1.06, 1.06);
-      box-shadow: 0 0 6px #bbbbbb;
-    }
-    /*myinfo_user 영역*/
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    .myinfo_user {
-      position: relative;
-      left: 0;
-      top: 70px;
-      bottom: 0;
-      height: 135%;
-      width: 100%;
-      padding: 10px 10px 10px 10px;
-    }
-    .myinfo_user_img {
-      position: relative;
-      top: 0;
-      margin: auto;
-      width: 100px;
-      height: 100px;
-      border-radius: 8px;
-      background-color: rgba(220,220,220,0.5);
-      cursor: default;
-      transition: 0.3s;
-    }
-    .myinfo_user_img:hover {
-      box-shadow: 0 0 6px #eeeeee;
-      transform: scale(1.06, 1.06);
-    }
-    .myinfo_user_name {
-      position: relative;
-      float: left;
-      top: 10px;
-      margin: auto;
-      width: 100%;
-      height: auto;
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      transition: 0.3s;
-      border-radius: 8px;
-      color: #333333;
-    }
-    .myinfo_user_number {
-      position: relative;
-      float: left;
-      top: 20px;
-      width: 100%;
-      height: 30px;
-      padding-bottom: 30px;
-      border-bottom: 3px solid #eeeeee;
-    }
-    .myinfo_user_number_title {
-      position: absolute;
-      left: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: default;
-      width: auto;
-      height: auto;
-      color: #333333;
-    }
-    .myinfo_user_number_number {
-      position: absolute;
-      right: 10px;
-      font-size: 20px;
-      width: auto;
-      height: auto;
-      color: #333333;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-    .myinfo_user_major {
-      position: relative;
-      float: left;
-      top: 40px;
-      width: 100%;
-      height: 30px;
-      padding-bottom: 30px;
-      border-bottom: 3px solid #eeeeee;
-    }
-    .myinfo_user_major_title {
-      position: absolute;
-      left: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: default;
-      width: auto;
-      height: auto;
-      color: #333333;
-    }
-    .myinfo_user_major_major {
-      position: absolute;
-      right: 10px;
-      font-size: 20px;
-      width: auto;
-      height: auto;
-      color: #333333;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-    /*내가 쓴글이 있는 box css*/
-    .myinfo_user_post {
-      position: relative;
-      margin: auto;
-      padding: 5px;
-      width: 90%;
-      height: 300px;
-      top: 170px;
-      background-color: rgba(250,250,250,0.5);
-      box-shadow: 0 0 8px #bbbbbb;
-      border-radius: 15px;
-    }
-    .myinfo_user_post_title {
-      position: absolute;
-      width: 95%;
-      height: 50px;
-      font-size: 20px;
-      font-weight: bold;
-      border-bottom: 3px solid #eeeeee;
-      color: #333333;
-      padding-top: 7px;
-      background-color: rgba(250,250,250,0.5);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .myinfo_user_post_content {
-      position: absolute;
-      width: 95%;
-      height: 179px;
-      top: 60px;
-      font-size: 18px;
-      font-weight: thin;
-      color: #666666;
-      padding-top: 5px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      border-bottom: 4px solid #eeeeee;
-    }
-    .myinfo_user_post_fix {
-      position: absolute;
-      width: 46.5%;
-      height: 45px;
-      bottom: 8px;
-      left: 8px;
-      border-radius: 8px;
-      background-color: rgba(220,220,220,0.5);
-      text-align: center;
-      font-size: 30px;
-      font-weight: bold;
-      transition: 0.4s;
-      cursor: pointer;
-    }
-    .myinfo_user_post_fix:hover {
-      background-color: rgba(120, 120, 120, 0.7);
-      color: white; 
-    }
-    .myinfo_user_post_delete {
-      position: absolute;
-      width: 46.5%;
-      height: 45px;
-      bottom: 8px;
-      right: 8px;
-      border-radius: 8px;
-      background-color: rgba(220,220,220,0.5);
-      text-align: center;
-      font-size: 30px;
-      font-weight: bold;
-      transition: 0.4s;
-      cursor: pointer;
-    }
-    .myinfo_user_post_delete:hover {
-      background-color: rgba(120, 120, 120, 0.7);
-      color: white;
-    }
-    .myinfo_user_logout {
-      position: relative;
-      top: 210px;
-      margin: auto;
-      width: 90%;
-      height: 50px;
-      border-radius: 8px;
-      color: white;
-      font-size: 20px;
-      background-color: #E93333;
-      padding: 10px;
-      padding-top: 12px;
-      text-align: center;
-      box-shadow: 0 0 8px #777777;
-      cursor: pointer;
-      transition: 0.6s;
-    }
-    .myinfo_user_logout:hover {
-      background-color: #B60B0B;
-      box-shadow: 0 0 8px #fefefe;
-    }
-    /*내가 쓴글이 없는 box css*/
-    .myinfo_user_post_not {
-      position: relative;
-      margin: auto;
-      padding: 5px;
-      width: 90%;
-      height: 300px;
-      top: 170px;
-      background-color: rgba(250,250,250,0.5);
-      box-shadow: 0 0 8px #bbbbbb;
-      border-radius: 15px;
-    }
-    .myinfo_user_post_not_img {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      font-size: 70px;
-      font-weight: bold;
-      color: #555555;
-      left: 50%;
-      top: 20%;
-      text-shadow: 0 0 6px #bbbbbb;
-      transform: translate(-50%, 0);
-      text-align: center;
-      cursor: default;
-    }
-    .myinfo_user_post_write {
-      position: absolute;
-      width: 240px;
-      height: 70px;
-      font-size: 30px;
-      padding-top: 13px;
-      font-weight: bold;
-      color: #333333;
-      left: 50%;
-      top: 55%;
-      transform: translate(-50%, 0);
-      border-radius: 8px;
-      box-shadow: 0 0 8px #aaaaaa;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.6s;
-    }
-    .myinfo_user_post_write:hover {
-      box-shadow: 0 0 0 rgba(0,0,0,0);
-      background-color: rgba(120, 120, 120, 0.7);
-      color: white;
-    }
-     /*myinfo_post 영역*/
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    .myinfo_post {
-      position: relative;
-      box-sizing: border-box;
-      right: 0;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      height: 90%;
-      width: 100%;
-      padding: 10px 10px 10px 10px;
-    }
-    .myinfo_post_good_button {
-      position: absolute;
-      width: 35%;
-      height: 80px;
-      z-index: 950;
-      box-sizing: border-box;
-      top: 5%;
-      left: 10%;
-      padding: 15px;
-      border-radius: 8px;
-      background-color: rgba(220,220,220,0.5);
-      text-align: center;
-      box-shadow: 0 0 8px #aaaaaa;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.4s;
-    }
-    .myinfo_post_bad_button {
-      position: absolute;
-      width: 35%;
-      height: 80px;
-      z-index: 950;
-      box-sizing: border-box;
-      top: 5%;
-      right: 10%;
-      padding: 15px;
-      border-radius: 8px;
-      background-color: rgba(220,220,220,0.5);
-      box-shadow: 0 0 8px #aaaaaa;
-      text-align: center;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.4s;
-    }
-    .myinfo_post_good_button:hover {
-      transform: translate(0, -10%);
-    }
-    .myinfo_post_bad_button:hover {
-      transform: translate(0, -10%);
-    }
-    .myinfo_post_button_click {
-      box-shadow: 0 0 0 rgba(0,0,0,0);
-      background-color: rgba(100,100,100,0.5);
-      color: white;
-      cursor: default;
-    }
-    .myinfo_post_bigbox {
-      position: absolute;
-      padding: 10px;
-      width: 92%;
-      height: 80%;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -46%);
-      border-radius: 8px;
-      box-shadow: 0 0 8px #aaaaaa;
-      background-color: rgba(253,253,253,1);
-      overflow-x: hidden;
-      overflow-y: auto;
-      z-index: 1000;
-    }
-    /*myinfo 안에 div 동적 생성 css*/
-    .myinfo_post_bigbox_content_good {
-      position: relative;
-      width: 98%;
-      height: 95px;
-      margin: auto;
-      padding: 5px;
-      border-radius: 8px;
-      box-shadow: 0 0 6px #aaaaaa;
-      background-color: rgba(245,245,245,1);
-      margin-bottom: 10px;
-      transition: 0.4s;
-      cursor: pointer;
-    }
-    .myinfo_post_bigbox_content_good:hover {
-      transform: scale(1.06, 1.06);
-      background-color: rgba(199, 255, 186, 0.5);
-      box-shadow: 0 0 0 rgba(0,0,0,0);
-    }
-    .myinfo_post_bigbox_content_bad {
-      position: relative;
-      width: 98%;
-      height: 95px;
-      margin: auto;
-      padding: 5px;
-      border-radius: 8px;
-      box-shadow: 0 0 6px #aaaaaa;
-      background-color: rgba(245,245,245,1);
-      margin-bottom: 10px;
-      transition: 0.4s;
-      cursor: pointer;
-    }
-    .myinfo_post_bigbox_content_bad:hover {
-      transform: scale(1.06, 1.06);
-      background-color: rgba(255, 219, 219,0.5);
-      box-shadow: 0 0 0 rgba(0,0,0,0);
-    }
-    .myinfo_post_bigbo_title {
-      position: relative;
-      width: 95%;
-      height: 35px;
-      font-size: 18px;
-      color: #333333;
-      padding-bottom: 5px;
-      border-bottom: 3px solid #eaeaea;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .myinfo_post_bigbo_text {
-      position: relative;
-      width: 95%;
-      height: 50px;
-      padding-top: 5px;
-      font-size: 15px;
-      color: #444444;
-      overflow: hidden;
-    }
-  }

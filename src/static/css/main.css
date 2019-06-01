@@ -777,7 +777,7 @@ border: none;
   height: 195px;
   z-index: 300;
   background-color: rgba(255,255,255,0);
-  border-radius: 8px;
+  border-radius: 0px 4px 4px 0px;
   transition: left 1s;
   
 }
@@ -792,6 +792,7 @@ border: none;
   margin-bottom: 15px;
   margin-left: 15px;
   margin-right: 10px;
+  border-radius: 0px 4px 4px 0px;
 
 }
 
