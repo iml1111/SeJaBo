@@ -4,7 +4,7 @@ var snackbar_cnt = 0;
 function snackbar(snackbar_value) {
     snackbar_cnt++;
     var temp = "snackbar" + snackbar_cnt;
-    $('#board1').append('<div id="snackbar" class=' + temp + '></div>');
+    $('#sejabo_body').append('<div id="snackbar" class=' + temp + '></div>');
 
     var temp2 = "." + temp;
 
@@ -19,5 +19,4 @@ function show_snackbar(temp2) {
         $(temp2).removeClass("show");
         $(temp2).remove();
     }, 3000);
-
 }

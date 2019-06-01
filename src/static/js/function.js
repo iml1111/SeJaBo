@@ -23,6 +23,7 @@ function remove_building_class()
     $(show_btn).removeClass('btn-warning');
 }
 
+//dae yul gwang hak
 $('#DYAI').click(function()
 {   
     remove_building_class();
@@ -58,3 +59,23 @@ $('#YGG').click(function()
     location_now();
     refleshPage('yul');
 });
+
+//dae yul gwang hak
+document.getElementById("new_page").onclick = function() {
+    if ($('#location_now').text() == '세종이노센터'){
+        refleshPage('dae');
+    }
+    else if ($('#location_now').text() == '학술정보원'){
+        refleshPage('hak');
+    }
+    else if ($('#location_now').text() == '광개토관'){
+        refleshPage('gwang');
+    }
+    else if ($('#location_now').text() == '율곡관'){
+        refleshPage('yul');
+    }
+    else {
+        refleshPage('all')
+    }
+    snackbar('새로고침 되었습니다!');
+}

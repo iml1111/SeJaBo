@@ -6,8 +6,3 @@ var img_options = {
     format: 'png'
 };
 
-//identification 테스트용.
-var hash = MD5('asdfsdafsdafsdafa');
-var data = new Identicon(hash, img_options).toString();
-$('#idenfication_test').attr("src", "data:image/png;base64," + data);
-

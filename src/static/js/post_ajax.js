@@ -12,6 +12,7 @@ function BOX_S(){
     post_size = "1";
 }
 
+//게시글 등록 =============================
 function post_submit(){
     var formData = new FormData();
 
@@ -63,17 +64,86 @@ function post_submit(){
     })
 }
 
+//게시글 수정 =============================
+function post_edit() {
+    var formData = new FormData();
+
+    var post_edit_title_real = $('#post_edit_title_real').val();
+    var post_edit_textarea = $('#post_edit_textarea').val();
+    var post_edit_URL = $('#post_edit_URL').val();
+    
+    formData.append('title', post_edit_title_real);
+    formData.append('content', post_edit_textarea);
+    formData.append('url', post_edit_URL);
+
+
+    if (post_edit_title_real.length < 100) {
+        var a_jax = A_JAX('/mod_post', "POST", localStorage.getItem('sejabo_token'), formData);
+
+        $.when(a_jax).done(function () {
+
+            var json = a_jax.responseJSON;
+
+            if (json['result'] == "success") {
+                post_edit_modal.style.display = "none";
+                $('#post_edit_modal_content').removeClass("magictime");
+                $('#post_edit_modal_content').removeClass("spaceInDown");
+                get_user_info();
+                snackbar('게시글이 수정되었습니다.');
+            }
+            else if (json['result'] == "bad request") {
+                alert("일시적인 오류가 발생했습니다. 잠시후 다시 시도해주세요.");
+            }
+            else {
+                alert("일시적인 오류가 발생했습니다. 잠시후 다시 시도해주세요.");
+            }
+        })
+    }
+    else
+    {
+        alert("제목의 길이는 100자 미만입니다.");
+    }
+
+
+}
+
+//게시글 삭제 ================================
+function post_delete() {
+    if (confirm("정말로 삭제하시겠습니까?") == true) {
+        var a_jax = A_JAX('/delete_post/'+user_POST['post_id'], "GET", localStorage.getItem('sejabo_token'));
+
+        $.when(a_jax).done(function () {
+
+            var json = a_jax.responseJSON;
+
+            if (json['result'] == "success") {
+                get_user_info();
+                snackbar('삭제되었습니다.');
+            }
+            else if (json['result'] == "bad request") {
+                alert("일시적인 오류가 발생했습니다. 잠시후 다시 시도해주세요.");
+            }
+            else {
+                alert("일시적인 오류가 발생했습니다. 잠시후 다시 시도해주세요.");
+            }
+        })
+    }
+    else {
+        return;
+    }
+}
+
+
 //업로드 파일 미리보기. 소스 =============================
 $("#post_creat_file").change(function() {
     readURL(this);
-    console.log(this);
 });
 
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
-            $('#post_select_box_img').attr('src', e.target.result);
+            $('.post_select_box_img').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }

@@ -6,42 +6,41 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!--모바일 브라우저 상태바 컬러-->
+	<!-- 모바일 브라우저 상태바 컬러 -->
 	<meta name="theme-color" content="#c6f3d5">
 
-	<!--세자보 탭 아이콘-->
+	<!-- 세자보 탭 아이콘 -->
 	<link rel="icon" type="image/png" href="../static/img/icons/favicon.ico" />
 
-	<!-- 부트스트랩-->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- 부트스트랩 -->
+	<link rel="stylesheet" href="../static/vendor/bootstrap/css/bootstrap.min.css">
 
-	<!--아이콘-->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<!-- 아이콘 -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="../static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 
+	<!-- 에니메이션 -->
 	<link rel="stylesheet" type="text/css" href="../static/vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="../static/vendor/css-hamburgers/hamburgers.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/vendor/select2/select2.min.css">
+	<link rel="stylesheet" href="../static/vendor/magic/dist/magic.css">
 
+	<!-- 커스텀 CSS -->
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/loading.css">
-	<link rel="stylesheet" href="../static/css/magic/dist/magic.css">
 	<link rel="stylesheet" href="../static/css/modal.css">
 
 
 
 </head>
 
-<body>
+<body id="sejabo_body">
 	<!--상단 버튼들-->
 	<button id="location_now" type="button" class="btn btn-primary location_now"
 		onclick="location_now();">세종이노센터</button>
 	<button id="new_page" type="button" class="btn btn-info new_page" onclick="refleshPage();">새로고침</button>
 	<button id="search_button" type="button" class="btn btn-secondary search_button" onclick="">검색</button>
-	<button id="login_button" type="button" class="btn btn-secondary login_button display_none">로그인</button>
-	<button id="myinfo_button" type="button" class="btn btn-secondary myinfo_button display_none">내정보</button>
+	<button id="login_button" type="button" class="btn btn-secondary login_button">로그인</button>
+	<button id="myinfo_button" type="button" class="btn btn-secondary myinfo_button" style="display: none">내정보</button>
 
 	<!--상단 타이틀-->
 	<div class="board-title">
@@ -76,7 +75,7 @@
 				</div>
 
 				<div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
-					<input class="input100" type="password" name="student_PW" placeholder="비밀번호" autocomplete="off">
+					<input class="input100" type="password" name="student_PW" placeholder="비밀번호" autocomplete="off" onkeyup="sejabo_login_enter()">
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
 						<span class="lnr lnr-lock"></span>
@@ -100,29 +99,27 @@
 			<div class="myinfo_top">SEJABO&nbsp;&nbsp;계정</div>
 			<span class="myinfo_modal_close">&times;</span>
 			<div id="myinfo_user" class="myinfo_user">
-				<div id="myinfo_user_img" class="myinfo_user_img">
-				</div>
+				<img id="myinfo_user_img" class="myinfo_user_img" scr="../static/img/SejaboLOGO.png">
 				<div id="myinfo_user_name" class="myinfo_user_name">
-					김형석
+					XXX
 				</div>
 				<div id="myinfo_user_number" class="myinfo_user_number">
 					<div class="myinfo_user_number_title"><span>학번</span></div>
-					<div id="myinfo_user_number_number" class="myinfo_user_number_number">16011075</div>
+					<div id="myinfo_user_number_number" class="myinfo_user_number_number">XXXXXXXX</div>
 				</div>
 				<div id="myinfo_user_major" class="myinfo_user_major">
 					<div class="myinfo_user_major_title"><span>학과</span></div>
 					<div id="myinfo_user_major_major" class="myinfo_user_major_major">컴퓨터공학과</div>
 				</div>
-				<div id="myinfo_user_post" class="myinfo_user_post">
-					<div id="myinfo_user_post_title" class="myinfo_user_post_title">내가쓴글제목입니다. 바로 그거입니다!</div>
-					<div id="myinfo_user_post_content" class="myinfo_user_post_content">테스트 내용입니다. 내가 쓴 테스트 내용입니다. 제가 쓴
-						테스트 내용입니다.</div>
+				<div id="myinfo_user_post" class="myinfo_user_post" style="display: none">
+					<div id="myinfo_user_post_title" class="myinfo_user_post_title">글 제목XXXXXXXX</div>
+					<div id="myinfo_user_post_content" class="myinfo_user_post_content">글 내용XXXXXXXXX</div>
 					<div id="myinfo_user_post_fix" class="myinfo_user_post_fix" title="수정하기"><i class="fas fa-edit"></i>
 					</div>
-					<div id="myinfo_user_post_delete" class="myinfo_user_post_delete" title="삭제하기"><i
+					<div id="myinfo_user_post_delete" class="myinfo_user_post_delete" title="삭제하기" onclick="post_delete()"><i
 							class="fas fa-trash"></i></div>
 				</div>
-				<div id="myinfo_user_post_not" class="myinfo_user_post_not" style="display: none">
+				<div id="myinfo_user_post_not" class="myinfo_user_post_not">
 					<div class="myinfo_user_post_not_img"><i class="fas fa-walking"></i></div>
 					<div id="myinfo_user_post_write" class="myinfo_user_post_write">
 						포스트 작성&nbsp;<i class="fas fa-pen-nib"></i>
@@ -145,7 +142,7 @@
 		<div id="search_modal_content" class="search_modal_content">
 			<span class="search_modal_close">&times;</span>
 			<i class="fas fa-search"></i>
-			<input type="text" class="search_modal_textbox" placeholder="입력 후 엔터를 쳐주세요!">
+			<input id="search_modal_textbox" type="text" class="search_modal_textbox" placeholder="입력 후 엔터를 쳐주세요!" onkeyup="search_enter();">
 		</div>
 	</div>
 
@@ -172,8 +169,7 @@
 			<!--내용영역-->
 			<div id="post_content_text" class="post_content_text">
 				<div class="profile_img">
-					<!--지우셈-->
-					<img id="idenfication_test" class="idenfication_test" src="" alt="Avatar">
+					<img id="profile_img_id" class="profile_img_id" src="" alt="Avatar">
 				</div>
 				<div id="profile_title" class="profile_title"></div>
 				<div class="profile_hr"></div>
@@ -215,7 +211,7 @@
 				</div>
 				<div class="form-group">
 					<div class="form-group">
-						<input id = "post_creat_URL" class="form-control form-control-sm" type="url" placeholder="첨부링크">
+						<input id = "post_creat_URL" class="form-control form-control-sm" type="url" placeholder="첨부링크(필수입력 아님)">
 						<label for="exampleFormControlFile1">첨 부 파 일</label>
 						<input type="file" class="form-control-file" id="post_creat_file">
 					</div>
@@ -237,7 +233,7 @@
 						onclick="BOX_S()">S</button>
 				</div>
 				<br>
-				<p id="post_warning" style="text-align: center">(실제 게시될 사이즈 입니다)</p>
+				<p id="post_warning" style="text-align: center">(실제 게시될 사이즈 입니다. 기본값: XL)</p>
 				<br>
 				<div class="form-group post_select_img_box">
 					<img id="post_select_box_img" class="post_select_box_img" src="../static/img/SejaboLOGO.png"
@@ -313,12 +309,12 @@
 					<br>
 					<hr>
 					<div class="form-group">
-						<input class="form-control form-control-lg" type="text" placeholder="제목">
+						<input id="post_edit_title_real" class="form-control form-control-lg" type="text" placeholder="제목">
 					</div>
 	
 					<div class="form-group">
 						<labelfor="exampleFormControlTextarea1">내 용</label>
-							<textarea class="form-control post_edit_textarea" id="exampleFormControlTextarea1"></textarea>
+							<textarea id="post_edit_textarea" class="form-control post_edit_textarea"></textarea>
 					</div>
 					<div class="form-group">
 						<div class="form-group">
@@ -328,7 +324,7 @@
 				</div>
 	
 				<button id="post_edit_button" type="button" class="btn btn-success post_edit_button"
-					onclick="">수정하기</button>
+					onclick="post_edit()">수정하기</button>
 	
 			</div>
 		</div>
@@ -400,40 +396,48 @@
 
 </body>
 <!-- JQuery JS -->
-<script src="/static/js/jquery/jquery.min.js"></script>
+<script src="../static/vendor/jquery/jquery.min.js"></script>
 
 <!-- Popper.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
 <!-- Bootstrap JS -->
-<script type="text/javascript" src="/static/js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-<!-- ?? -->
+<!-- animation -->
 <script src="../static/vendor/select2/select2.min.js"></script>
-
-<!-- Board JS -->
-<script src="../static/js/board.js"></script>
-
-<!-- Design JS -->
-<script src="../static/js/myinfo.js"></script>
-<script src="../static/js/modal.js"></script>
-<script src="../static/js/main.js"></script>
-<script src="../static/js/function.js"></script>
-
-<!-- Snackbar JS -->
-<script src="../static/js/snackbar.js"></script>
 
 <!-- Identification JS -->
 <script src="../static/js/pnglib.js"></script>
 <script src="../static/js/identicon.js"></script>
 <script src="../static/js/identification.js"></script>
 
+<!-- AJAX JS -->
+<script src="../static/js/ajax.js"></script>
+
+<!-- AJAX_POST JS -->
+<script src="../static/js/newpage_ajax.js"></script>
+
+<!-- Board JS -->
+<script src="../static/js/board.js"></script>
+
+<!-- Design JS -->
+<script src="../static/js/myinfo.js"></script>
+<script src="../static/js/main.js"></script>
+<script src="../static/js/function.js"></script>
+
+<!-- Snackbar JS -->
+<script src="../static/js/snackbar.js"></script>
+
 <!-- SliderBar JS -->
 <script src="../static/js/slider_bar_dynamic.js"></script>
 
-<!-- AJAX JS -->
-<script src="../static/js/ajax.js"></script>
+<!-- AJAX_USER JS -->
 <script src="../static/js/user_ajax.js"></script>
 <script src="../static/js/post_ajax.js"></script>
+
+<!-- Modal JS-->
+<script src="../static/js/modal.js"></script>
+<script src="../static/js/search_ajax.js"></script>
 
 </html>

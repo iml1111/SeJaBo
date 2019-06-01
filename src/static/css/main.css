@@ -78,17 +78,18 @@ a:hover {
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 250px; /* Set a default minimum width */
   margin-left: -125px; /* Divide value of min-width by 2 */
-  background-color: #333; /* Black background color */
+  background-color: rgb(87, 86, 86); /* Black background color */
   color: #fff; /* White text color */
   text-align: center; /* Centered text */
-  border-radius: 8px; /* Rounded borders */
+  border-radius: 4px; /* Rounded borders */
   padding: 16px; /* Padding */
   position: fixed; /* Sit on top of the screen */
   z-index: 1; /* Add a z-index if needed */
   right: 30px; /* Center the snackbar */
   bottom: 20px; /* 20px from the bottom */
   cursor: default;
-  box-shadow: 0 0 6px #bbbbbb; 
+  box-shadow: 0 0 3px #bbbbbb; 
+  z-index: 10000;
 }
 #snackbar.show {
   visibility: visible; /* Show the snackbar */
@@ -193,7 +194,10 @@ iframe {
   word-break: break-all;
   color: #444444;
 }
-.box_css_img {background-size: cover;}
+.box_css_img {
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 .box_fa30 {font-size: 30px;} 
 .box_fa40 {font-size: 38px;}
 .box_fa60 {font-size: 60px;}
@@ -832,10 +836,11 @@ border: none;
     margin-left: 0px;
   }
   .myinfo_button {
+    position: relative;
     float: right;
     width: auto;
     height: auto;
-    margin: 0.5% 0.5%;
+    margin: 2% 1.5%;
     margin-left: 0px;
   }
   .search_button
@@ -917,13 +922,25 @@ border: none;
     cursor: default;
     transition: 0.7s;
   }
+  .box_css_basic {
+     position: absolute;
+     box-shadow: 0 0 3px #eeeeee;
+     border-radius: 6px;
+     cursor: pointer;
+     z-index: 250;
+     transition: 0.3s;
+     transition-timing-function: ease-in-out;
+   }
+   .box_css_text {
+     font-family: Raleway-Black;
+     text-shadow: 0 0px 0px rgba(0,0,0,0);
+     font-weight: lighter;
+     overflow: hidden;
+     word-break: break-all;
+     color: #444444;
+   }
   .box_fa30 {font-size: 14px;} 
   .box_fa40 {font-size: 15px;}
   .box_fa60 {font-size: 20px;}
   .box_fa80 {font-size: 30px;}
-}
-
-
-.idenfication_test {
-    border-radius: 8px;
 }
