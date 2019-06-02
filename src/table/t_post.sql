@@ -9,6 +9,7 @@ url TEXT,
 img_url VARCHAR(1000),
 view_count INT NOT NULL,
 size TINYINT NOT NULL,
+INDEX(exp_date),
 PRIMARY KEY(post_id),
 FOREIGN KEY(author) REFERENCES user(student_id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
