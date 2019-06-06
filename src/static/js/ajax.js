@@ -8,9 +8,9 @@ function A_JAX(url, type, token, data){
             url: url,
             data: json_data,
             dataType : "json",
-            success: function(res){},
+            success: function(res){
+            },
             error: function(res){
-                return {'result': 'fail'};
             }
         });
     }
@@ -26,11 +26,17 @@ function A_JAX(url, type, token, data){
             dataType : "json",
             success: function(res){},
             error: function(res){
-                return {'result': 'fail'};
             }
         });
     }
-
+    /*if(ajax_['result'] == "your not Sejong"){
+        alert("당신은 세종대 학생이 아닙니다.");
+        return undefined;
+    }
+    else{
+        return ajax_;
+    }*/
     return ajax_;
+    
 }
 

@@ -22,7 +22,7 @@ def bad_requests(error):
 # 세종대 인증 실패
 @bp.app_errorhandler(406)
 def bad_requests(error):
-		return jsonify(result = "your not Sejong"), 400
+		return jsonify(result = "your not Sejong"), 406
 
 @bp.app_errorhandler(422)
 def bad_requests(error):

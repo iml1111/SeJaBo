@@ -123,13 +123,11 @@ function sejabo_login(){
     }
 
     var send_data = {id: login_id, pw: login_pw};
-
     var a_jax = A_JAX('/login', "POST", null, send_data);
     $.when(a_jax).done(function(){
-    
         var json = a_jax.responseJSON;
-
-        if(json['result'] == "input wrong")
+        console.log(json);
+        if(json['result'] == "your not Sejong")
         {
             alert("로그인에 실패했습니다.");
         }

@@ -65,13 +65,11 @@ def add_post():
       filename = str(current_user['student_id']) +  get_today_datetime() + "." + secure_filename(img.filename).split(".")[-1]
       print(filename)
       if not allowed_file(filename):
-         print(111)
          abort(400)
       img.save("." + UPLOAD_PATH + filename)
    else: 
       filename = None
    if filename is not None and allowed_file(filename) is False:
-      print(222)
       abort(400)
    input_tuple = (
       current_user['student_id'],
@@ -167,9 +165,10 @@ def login_proc():
    current_user = select_id(g.db, user_id)
    if current_user is None:
       api_result = sejong_api(user_id, user_pw)
-      if not api_result['result']: abort(406)
+      if not api_result['result']:
+         return jsonify(result = "your not Sejong")
       db_data = (
-         user_id,
+         int(user_id),
          generate_password_hash(user_pw),
          api_result['major'],
          api_result['name']
