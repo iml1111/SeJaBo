@@ -126,7 +126,6 @@ function sejabo_login(){
     var a_jax = A_JAX('/login', "POST", null, send_data);
     $.when(a_jax).done(function(){
         var json = a_jax.responseJSON;
-        console.log(json);
         if(json['result'] == "your not Sejong")
         {
             alert("로그인에 실패했습니다.");
