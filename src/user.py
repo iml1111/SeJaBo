@@ -165,6 +165,7 @@ def login_proc():
    current_user = select_id(g.db, user_id)
    if current_user is None:
       api_result = sejong_api(user_id, user_pw)
+      #api_result = {"result":True, "major":"컴퓨터공학과","name": "신모씨"}
       if not api_result['result']:
          return jsonify(result = "your not Sejong")
       db_data = (
