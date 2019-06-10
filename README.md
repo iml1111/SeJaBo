@@ -13,7 +13,7 @@ Information sharing SNS service for Sejong University students
 
 ```c
 $ cd SeJaBo
-$ pip install -r requirement.txt
+$ pip install -r requirements.txt
 $ cd src
 $ python app.py
 ```

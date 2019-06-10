@@ -48,7 +48,7 @@ def add_post():
    exp_date = request.form['exp_date']
    url = request.form.get('url')
    if url == "": url = None
-   if not all(i in build for i in build):
+   if not all(i in BUILD_LIST for i in build):
       abort(400)
    if not (len(title) >= 1 and len(title) <= 500):
       abort(400)
