@@ -3,6 +3,7 @@ from pprint import pprint
 import time
 import os
 #2304 1296
+a = 1
 n, m = 0, 0
 block = {
 1:{"w":9,"h":12},
