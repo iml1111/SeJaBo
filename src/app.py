@@ -4,7 +4,7 @@ from flask_jwt_extended import JWTManager
 from db_init import *
 from iml_global import *
 import user, board, error
-
+a = 1
 application = Flask(__name__, instance_relative_config=True)
 #Debug or Release
 application.config.update(
